@@ -3,29 +3,22 @@ using System.Collections;
 using FrameWork.Extensions;
 using FrameWork.GridSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player.Movement
 {
     public class PlayerMovement : MonoBehaviour
     { 
-        public float movementSpeed;
+        [SerializeField, Range(1,10)] private float movementSpeed;
         
         private int _enumLength;
-        private int _index;
+        private int _gridIndex;
 
-        private void Awake()
-        {
-            _enumLength = Enum.GetNames(typeof(GridPoints)).Length;
-        }
+        private void Awake()=> _enumLength = Enum.GetNames(typeof(GridPoints)).Length;
         
-
         private IEnumerator MoveTowardsGridPoint()
         {
-            print("loop");
-            
-            _index = (_index + 1) % _enumLength;
-            GridPoints nextpoint = (GridPoints) _index;
+            _gridIndex = (_gridIndex + 1) % _enumLength;
+            GridPoints nextpoint = (GridPoints) _gridIndex;
 
             Vector3 newPos;
             newPos = nextpoint.GetVector3();
@@ -35,15 +28,9 @@ namespace Player.Movement
                 yield return null;
             }
         }
-
-        public void StartMoving()
-        {
-            StartCoroutine(MoveTowardsGridPoint());
-        }
-
-        /*public void ActivateBool()
-        {
-            Moving = true;
-        }*/
+        /// <summary>
+        /// Starts the coroutine to start moving the player from point A > The next point
+        /// </summary>
+        public void StartMoving() => StartCoroutine(MoveTowardsGridPoint());
     }
 }

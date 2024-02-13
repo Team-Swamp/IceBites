@@ -10,7 +10,6 @@ namespace Player.Input_Parser
     {
         private PlayerInput _playerInput;
         private InputActionAsset _inputActionAsset;
-
         private PlayerMovement _playerMovement;
 
         private void Awake()
@@ -18,12 +17,8 @@ namespace Player.Input_Parser
             _playerInput = GetComponent<PlayerInput>();
             _inputActionAsset = _playerInput.actions;
             _playerMovement = GetComponent<PlayerMovement>();
-            
+
             AddListeners();
-            
-            print(_inputActionAsset["MoveTowards"]);
-            print(_playerMovement);
-            print(_playerInput);
         }
 
         private void OnDisable()
@@ -34,7 +29,6 @@ namespace Player.Input_Parser
         private void AddListeners()
         {
             _inputActionAsset["MoveTowards"].performed += MoveTowards;
-            print("Weeee");
         }
 
         private void RemoveListeners()
