@@ -5,7 +5,6 @@ using FrameWork.Attributes;
 
 namespace FrameWork.Extensions
 {
-
     public static class EnumExtensions
     {
         /// <summary>
