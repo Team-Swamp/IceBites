@@ -7,6 +7,6 @@ namespace FrameWork.Attributes
     {
         public Vector3 Value { get; }
 
-        public Vector3Value(Vector3 value) => Value = value;
+        public Vector3Value(float x, float y, float z) => Value = new Vector3(x, y, z);
     }
 }
