@@ -25,7 +25,8 @@ namespace FrameWork
 
         private void Awake()
         {
-            _timerData = new TimerData(180, 15);
+            // 180, 15
+            _timerData = new TimerData(10, 5);
 
             if (startingTime == 0)
                 startingTime = _timerData.mainTimerLenght;
@@ -67,6 +68,19 @@ namespace FrameWork
         /// </summary>
         /// <returns>The current timer lenght</returns>
         public float GetCurrentTimerLenght() => _currentTimer;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Return a number between 0-1</returns>
+        public float GetCurrentTimerPercentage()
+        {
+            float hundredPercent = _isTimerLenghtSmall 
+                ? _timerData.mainTimerLenght 
+                : _timerData.smallTimerLenght;
+            float currentPercent = _currentTimer / hundredPercent;
+            return currentPercent;
+        }
         
         private void Counting()
         {
