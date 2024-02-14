@@ -468,7 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ads:
   - {fileID: 21300000, guid: 87c34f6318faa974e85be5a1f430ddb0, type: 3}
-  displayAd: {fileID: 0}
+  displayAd: {fileID: 420333722}
 --- !u!114 &1038107461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCountingUp: 0
   canCount: 1
-  startingTime: 180
+  startingTime: 0
   timerThreshold: 0
   onTimerDone:
     m_PersistentCalls:
@@ -497,6 +497,18 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1038107461}
+        m_TargetAssemblyTypeName: FrameWork.Timer, Assembly-CSharp
+        m_MethodName: ToggleTimerLengthPreference
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 15
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

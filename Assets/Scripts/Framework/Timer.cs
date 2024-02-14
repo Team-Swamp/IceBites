@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FrameWork.Structs;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace FrameWork
@@ -11,6 +12,8 @@ namespace FrameWork
         [SerializeField] private float timerThreshold;
 
         private float _currentTimer;
+        private bool _isTimerLenghtSmall;
+        private TimerData _timerData;
 
         #region Events
         
@@ -20,7 +23,13 @@ namespace FrameWork
 
         #endregion
 
-        private void Awake() => ResetTimer();
+        private void Awake()
+        {
+            _timerData = new TimerData(180, 15);
+
+            if (startingTime == 0)
+                startingTime = _timerData.mainTimerLenght;
+        }
 
         private void Update() => Counting();
 
@@ -29,15 +38,29 @@ namespace FrameWork
         /// </summary>
         public void ResetTimer()
         {
-            _currentTimer = startingTime;
             onReset?.Invoke();
+            _currentTimer = startingTime;
         }
 
         /// <summary>
         /// Set the timer lenght, when resetting it will use this number.
         /// </summary>
         /// <param name="target">The target amount for the timer</param>
-        public void SetTimerLenght(float target) => startingTime = target;
+        public void SetTimerLenght(float target) => _currentTimer = target;
+
+        /// <summary>
+        /// Toggles the current timer to the big lenght if previously was small, otherwise in reverse.
+        /// </summary>
+        public void ToggleTimerLengthPreference()
+        {
+            _currentTimer = _isTimerLenghtSmall
+                ? _timerData.mainTimerLenght
+                : _timerData.smallTimerLenght;
+
+            print($"Current timer lenght is now: {_currentTimer}.");
+            
+            _isTimerLenghtSmall = !_isTimerLenghtSmall;
+        }
 
         /// <summary>
         /// Get the timer it's current lenght.
