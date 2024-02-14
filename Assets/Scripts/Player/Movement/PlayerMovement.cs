@@ -13,21 +13,29 @@ namespace Player.Movement
         private int _enumLength;
         private int _gridIndex;
 
-        private void Awake()=> _enumLength = Enum.GetNames(typeof(GridPoints)).Length;
+        private bool _moving;
+
+        private void Awake()=> _enumLength = Enum.GetNames(typeof(PlayerGridPoints)).Length;
         
         private IEnumerator MoveTowardsGridPoint()
         {
-            _gridIndex = (_gridIndex + 1) % _enumLength;
-            GridPoints nextpoint = (GridPoints) _gridIndex;
-
-            Vector3 newPos;
-            newPos = nextpoint.GetVector3();
-            while (transform.position != newPos)
+            if (!_moving)
             {
-                transform.position = Vector3.MoveTowards(transform.position, newPos, movementSpeed * Time.deltaTime);
-                yield return null;
+                _gridIndex = (_gridIndex + 1) % _enumLength;
+                PlayerGridPoints nextpoint = (PlayerGridPoints) _gridIndex;
+
+                Vector3 newPos;
+                newPos = nextpoint.GetVector3();
+                while (transform.position != newPos)
+                {
+                    _moving = true;
+                    transform.position = Vector3.MoveTowards(transform.position, newPos, movementSpeed * Time.deltaTime);
+                    yield return null;
+                }
+
+                _moving = false;
             }
-        }
+        } 
         /// <summary>
         /// Starts the coroutine to start moving the player from point A > The next point
         /// </summary>
