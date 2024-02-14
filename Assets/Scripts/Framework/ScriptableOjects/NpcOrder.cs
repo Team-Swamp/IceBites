@@ -1,7 +1,7 @@
 ﻿using FrameWork.Enums;
 using UnityEngine;
 
-namespace FrameWork.ScriptableOjects
+namespace FrameWork.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "newNpcOder", menuName = "VooDoo/NPC", order = 0)]
     public sealed class NpcOder : ScriptableObject

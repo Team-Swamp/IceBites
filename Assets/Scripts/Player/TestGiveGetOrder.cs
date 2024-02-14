@@ -1,11 +1,13 @@
-﻿using System;
-using FrameWork.Enums;
+﻿using FrameWork.Enums;
 using NPC;
 using UnityEngine;
 
 namespace Player
 {
-    public sealed class GiveOrder : MonoBehaviour
+    /// <summary>
+    /// Test class. Later would be replaced or rework when player can walk in the kitchen.
+    /// </summary>
+    public sealed class TestGiveGetOrder : MonoBehaviour
     {
         [SerializeField] private NpcOrdering npc;
         [SerializeField] private bool order;
