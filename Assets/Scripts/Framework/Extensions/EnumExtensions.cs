@@ -2,6 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 using FrameWork.Attributes;
+using Random = System.Random;
 
 namespace FrameWork.Extensions
 {
@@ -61,6 +62,13 @@ namespace FrameWork.Extensions
             Vector3Value attribute = (Vector3Value)Attribute.GetCustomAttribute(fieldInfo, typeof(Vector3Value));
 
             return attribute?.Value ?? Vector3.zero;
+        }
+        
+        public static T GetRandomEnumValue<T>()
+        {
+            Array enumValues = Enum.GetValues(typeof(T));
+            Random random = new Random();
+            return (T)enumValues.GetValue(random.Next(enumValues.Length));
         }
     }
 }
