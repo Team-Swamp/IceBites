@@ -36,6 +36,6 @@ namespace Player.Input_Parser
             _inputActionAsset["MoveTowards"].performed -= MoveTowards;
         }
 
-        private void MoveTowards(InputAction.CallbackContext context) => _playerMovement.StartMoving();
+        private void MoveTowards(InputAction.CallbackContext context) => _playerMovement.StartMovingEvent();
     }
 }
