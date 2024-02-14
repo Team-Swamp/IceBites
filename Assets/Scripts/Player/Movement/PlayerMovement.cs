@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Player.Movement
 {
-    public class PlayerMovement : MonoBehaviour
+    public sealed class PlayerMovement : MonoBehaviour
     { 
         [SerializeField, Range(1,10)] private float movementSpeed;
         
