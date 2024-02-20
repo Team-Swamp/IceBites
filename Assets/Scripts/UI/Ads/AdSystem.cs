@@ -9,7 +9,9 @@ namespace UI.Ads
         [SerializeField] private Sprite[] ads;
         [SerializeField] private Image displayAd;
 
-        private void Awake() => displayAd.enabled = false;
+        private bool _isVisible;
+        
+        private void Awake() => ToggleAdVisibility();
 
         /// <summary>
         /// Toggle the visibility of the ad, also sets a new ad.
@@ -17,7 +19,8 @@ namespace UI.Ads
         public void ToggleAdVisibility()
         {
             displayAd.sprite = SetRandomAd();
-            displayAd.enabled = !displayAd.enabled;
+            _isVisible = !_isVisible;
+            displayAd.gameObject.SetActive(_isVisible);
         }
  
         private Sprite SetRandomAd()

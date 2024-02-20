@@ -12,6 +12,7 @@ namespace FrameWork
         [SerializeField] private float timerThreshold;
 
         private float _currentTimer;
+        private bool _isStarting;
         private bool _isTimerLenghtSmall;
         private TimerData _timerData;
 
@@ -19,6 +20,7 @@ namespace FrameWork
         
         [SerializeField] private UnityEvent onTimerDone = new();
         [SerializeField] private UnityEvent onTimerPassedThreshold = new();
+        [SerializeField] private UnityEvent onStart = new();
         [SerializeField] private UnityEvent onReset = new();
 
         #endregion
@@ -41,28 +43,21 @@ namespace FrameWork
         {
             onReset?.Invoke();
             _currentTimer = startingTime;
+            _isStarting = true;
         }
 
+        /// <summary>
+        /// Set the canCount property, when setting it to true it will start counting, otherwise is stops.
+        /// </summary>
+        /// <param name="target">The target for the property</param>
+        public void SetCanCount(bool target) => canCount = target;
+        
         /// <summary>
         /// Set the timer lenght, when resetting it will use this number.
         /// </summary>
         /// <param name="target">The target amount for the timer</param>
         public void SetTimerLenght(float target) => _currentTimer = target;
-
-        /// <summary>
-        /// Toggles the current timer to the big lenght if previously was small, otherwise in reverse.
-        /// </summary>
-        public void ToggleTimerLengthPreference()
-        {
-            _currentTimer = _isTimerLenghtSmall
-                ? _timerData.mainTimerLenght
-                : _timerData.smallTimerLenght;
-
-            print($"Current timer lenght is now: {_currentTimer}.");
-            
-            _isTimerLenghtSmall = !_isTimerLenghtSmall;
-        }
-
+        
         /// <summary>
         /// Get the timer it's current lenght.
         /// </summary>
@@ -70,7 +65,7 @@ namespace FrameWork
         public float GetCurrentTimerLenght() => _currentTimer;
 
         /// <summary>
-        /// 
+        /// Calculates the percentage of the current timer relative to the progress.
         /// </summary>
         /// <returns>Return a number between 0-1</returns>
         public float GetCurrentTimerPercentage()
@@ -81,12 +76,32 @@ namespace FrameWork
             float currentPercent = _currentTimer / hundredPercent;
             return currentPercent;
         }
+
+        /// <summary>
+        /// Toggles the current timer to the big lenght if previously was small, otherwise in reverse.
+        /// </summary>
+        public void ToggleTimerLengthPreference()
+        {
+            _currentTimer = _isTimerLenghtSmall
+                ? _timerData.mainTimerLenght
+                : _timerData.smallTimerLenght;
+
+            print($"Current timer lenght is now: {_currentTimer}."); // temp
+            
+            _isTimerLenghtSmall = !_isTimerLenghtSmall;
+        }
         
         private void Counting()
         {
             if(!canCount)
                 return;
 
+            if (_isStarting)
+            {
+                _isStarting = false;
+                onStart?.Invoke();
+            }
+            
             _currentTimer = isCountingUp 
                 ? _currentTimer + Time.deltaTime 
                 : _currentTimer - Time.deltaTime;

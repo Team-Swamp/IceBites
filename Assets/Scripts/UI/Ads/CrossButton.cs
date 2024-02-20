@@ -51,8 +51,8 @@ namespace UI.Ads
             
             cross.fillAmount = 1 - timer.GetCurrentTimerPercentage();// here an extra timer is needed and the main timer for turning on and off
 
-            if (Math.Abs(cross.fillAmount - 1) < 0.01f)
-                button.enabled = true;
+            // if (Math.Abs(cross.fillAmount - 1) < 0.01f)
+                button.enabled = Math.Abs(cross.fillAmount - 1) < 0.01f;
         }
     }
 }

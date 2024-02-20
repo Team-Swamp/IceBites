@@ -12,6 +12,7 @@ namespace Editor
         private SerializedProperty _canCount;
         private SerializedProperty _onTimerDone;
         private SerializedProperty _onTimerPassedThreshold;
+        private SerializedProperty _onStart;
         private SerializedProperty _onReset;
 
         /// <summary>
@@ -31,6 +32,7 @@ namespace Editor
             EditorGUILayout.Space(20);
             EditorGUILayout.LabelField("Events", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_isCountingUp.boolValue ? _onTimerPassedThreshold : _onTimerDone);
+            EditorGUILayout.PropertyField(_onStart);
             EditorGUILayout.PropertyField(_onReset);
     
             serializedObject.ApplyModifiedProperties();
@@ -44,6 +46,7 @@ namespace Editor
             _canCount = serializedObject.FindProperty("canCount");
             _onTimerDone = serializedObject.FindProperty("onTimerDone");
             _onTimerPassedThreshold = serializedObject.FindProperty("onTimerPassedThreshold");
+            _onStart = serializedObject.FindProperty("onStart");
             _onReset = serializedObject.FindProperty("onReset");
         }
     }
