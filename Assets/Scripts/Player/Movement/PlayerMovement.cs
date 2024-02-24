@@ -7,13 +7,7 @@ namespace Player.Movement
 {
     public class PlayerMovement : Framework.Movement
     {
-        [SerializeField, Range(1,10)] private float movementSpeed; 
-
         [SerializeField] private UnityEvent startedMoving = new();
-        private void Start()
-        {
-            MovementSpeed = movementSpeed;
-        }
 
         /// <summary>
         /// Starts the coroutine to start moving the player from point A > The next point

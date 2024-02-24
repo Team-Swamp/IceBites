@@ -2,18 +2,15 @@
 using System.Collections;
 using FrameWork.Extensions;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 namespace Framework
 {
     public abstract class Movement : MonoBehaviour
     {
-        [Range(1,10)] private float _movementSpeed; 
+        [Range(1,10)] public float MovementSpeed; 
 
         private bool _moving;
-        public float MovementSpeed
-        {
-            get => _movementSpeed;
-            set => _movementSpeed = value;
-        }
 
         protected IEnumerator MoveTowardsGridPoint<T>(T points) where T: Enum
         {

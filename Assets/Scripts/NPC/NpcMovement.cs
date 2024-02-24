@@ -8,15 +8,9 @@ namespace NPC
 {
     public sealed class NpcMovement : Movement
     {
-        [SerializeField, Range(1, 10)] private float movementSpeed;
+        
 
-        private void Start()
-        {
-            MovementSpeed = movementSpeed;
-
-            StartCoroutine(MovingNpc());
-        }
-
+        private void Start() => StartCoroutine(MovingNpc());
         public void MoveNpc(int points)
         {
             GridPoints.NpcPoints npcPoints = (GridPoints.NpcPoints)points;
