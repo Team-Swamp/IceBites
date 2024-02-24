@@ -1,41 +1,47 @@
 using System;
 using System.Collections;
-using FrameWork.Extensions;
+using Framework;
 using FrameWork.GridSystem;
 using UnityEngine;
 
 namespace NPC
 {
-    public class NpcMovement : MonoBehaviour
+    public sealed class NpcMovement : Movement
     {
         [SerializeField, Range(1, 10)] private float movementSpeed;
-        
-        private int _enumLength;
-        private int _gridIndex;
 
-        private bool _moving;
-        private void Awake() => _enumLength = Enum.GetNames(typeof(NpcGridpoints)).Length;
-
-        private void Update() => MoveNpc();
-
-        private IEnumerator MovementNpc()
+        private void Start()
         {
-            if (!_moving)
+            MovementSpeed = movementSpeed;
+
+            StartCoroutine(MovingNpc());
+        }
+
+        public void MoveNpc(int points)
+        {
+            GridPoints.NpcPoints npcPoints = (GridPoints.NpcPoints)points;
+
+            switch (npcPoints)
             {
-                _gridIndex = (_gridIndex + 1) % _enumLength;
-                NpcGridpoints npcGridpoints = (NpcGridpoints) _gridIndex;
-
-                Vector3 nextPos = npcGridpoints.GetVector3();
-                while (transform.position != nextPos)
-                {
-                    _moving = true;
-                    transform.position = Vector3.MoveTowards(transform.position, nextPos, movementSpeed * Time.deltaTime);
-                    yield return null;
-                }
-
-                _moving = false;
+                case GridPoints.NpcPoints.NPC_STARTING_POINT:
+                    StartCoroutine(MoveTowardsGridPoint(GridPoints.NpcPoints.NPC_STARTING_POINT));
+                    break;
+                case GridPoints.NpcPoints.NPC_COUNTER_POINT:
+                    StartCoroutine(MoveTowardsGridPoint(GridPoints.NpcPoints.NPC_COUNTER_POINT));
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
-        private void MoveNpc() => StartCoroutine(MovementNpc());
+
+        private IEnumerator MovingNpc()
+        {
+            while (true)
+            {
+                MoveNpc(1);
+                yield return new WaitForSeconds(5);
+                MoveNpc(0);
+            }
+        }
     }
 }

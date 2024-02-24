@@ -1,8 +1,6 @@
-using System;
 using Player.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Processors;
 
 namespace Player.Input_Parser
 {
@@ -20,7 +18,7 @@ namespace Player.Input_Parser
 
             AddListeners();
         }
-
+        
         private void OnDisable()
         {
             RemoveListeners();
