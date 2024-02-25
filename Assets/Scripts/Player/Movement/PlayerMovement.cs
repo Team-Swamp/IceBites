@@ -1,27 +1,23 @@
 using System;
 using FrameWork.GridSystem;
-using UnityEngine;
-using UnityEngine.Events;
 
 namespace Player.Movement
 {
-    public class PlayerMovement : Framework.Movement
+    public sealed class PlayerMovement : Framework.Movement
     {
-        [SerializeField] private UnityEvent startedMoving = new();
-
         /// <summary>
-        /// Starts the coroutine to start moving the player from point A > The next point
+        /// Calls the coroutine to start moving the player from it's current position to a newly assigned one.
         /// </summary>
         public void StartMoving(int playerPoints)
         {
-            GridPoints.PlayerPoints points = (GridPoints.PlayerPoints)playerPoints;
+            PlayerPoints points = (PlayerPoints)playerPoints;
             switch (points)
             {
-                case GridPoints.PlayerPoints.POINT_A:
-                    StartCoroutine(MoveTowardsGridPoint(GridPoints.PlayerPoints.POINT_A));
+                case PlayerPoints.POINT_A:
+                    StartCoroutine(MoveTowardsGridPoint(PlayerPoints.POINT_A));
                     break;
-                case GridPoints.PlayerPoints.POINT_B:
-                    StartCoroutine(MoveTowardsGridPoint(GridPoints.PlayerPoints.POINT_B));
+                case PlayerPoints.POINT_B:
+                    StartCoroutine(MoveTowardsGridPoint(PlayerPoints.POINT_B));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -31,6 +27,6 @@ namespace Player.Movement
         /// <summary>
         /// Starts a unity event to call the coroutine for moving the player. This allows for us to choose which point the player moves with unity events
         /// </summary>
-        public void StartMovingEvent() => startedMoving.Invoke();
+        public void StartMovingEvent() => onStartedMoving.Invoke();
     }
 }

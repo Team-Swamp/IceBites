@@ -11,17 +11,18 @@ namespace NPC
         
 
         private void Start() => StartCoroutine(MovingNpc());
+        
         public void MoveNpc(int points)
         {
-            GridPoints.NpcPoints npcPoints = (GridPoints.NpcPoints)points;
+            NpcPoints npcPoints = (NpcPoints)points;
 
             switch (npcPoints)
             {
-                case GridPoints.NpcPoints.NPC_STARTING_POINT:
-                    StartCoroutine(MoveTowardsGridPoint(GridPoints.NpcPoints.NPC_STARTING_POINT));
+                case NpcPoints.NPC_STARTING_POINT:
+                    StartCoroutine(MoveTowardsGridPoint(NpcPoints.NPC_STARTING_POINT));
                     break;
-                case GridPoints.NpcPoints.NPC_COUNTER_POINT:
-                    StartCoroutine(MoveTowardsGridPoint(GridPoints.NpcPoints.NPC_COUNTER_POINT));
+                case NpcPoints.NPC_COUNTER_POINT:
+                    StartCoroutine(MoveTowardsGridPoint(NpcPoints.NPC_COUNTER_POINT));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
