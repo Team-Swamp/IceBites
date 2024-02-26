@@ -6,7 +6,11 @@ namespace FrameWork
 {
     public sealed class Timer : MonoBehaviour
     {
+        private const int BIG_TIMER = 180;
+        private const int SMALL_TIMER = 15;
+        
         [SerializeField] private bool isCountingUp;
+        [SerializeField] private bool canCountOnAwake;
         [SerializeField] private bool canCount;
         [SerializeField] private float startingTime;
         [SerializeField] private float timerThreshold;
@@ -27,8 +31,8 @@ namespace FrameWork
 
         private void Awake()
         {
-            // 180, 15
-            _timerData = new TimerData(10, 5);
+            SetCanCount(canCountOnAwake);
+            _timerData = new TimerData(BIG_TIMER, SMALL_TIMER);
 
             if (startingTime == 0)
                 startingTime = _timerData.mainTimerLenght;
@@ -85,8 +89,6 @@ namespace FrameWork
             _currentTimer = _isTimerLenghtSmall
                 ? _timerData.mainTimerLenght
                 : _timerData.smallTimerLenght;
-
-            print($"Current timer lenght is now: {_currentTimer}."); // temp
             
             _isTimerLenghtSmall = !_isTimerLenghtSmall;
         }

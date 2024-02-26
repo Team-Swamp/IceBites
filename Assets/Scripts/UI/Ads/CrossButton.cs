@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace UI.Ads
 {
+    /// <summary>
+    /// This class is not in use.
+    /// </summary>
     public sealed class CrossButton : MonoBehaviour
     {
         [SerializeField] private Image cross;
@@ -13,21 +16,18 @@ namespace UI.Ads
 
         private bool _canLoad;
 
-        private void Awake()
-        {
-            InitCrossButton();
-            SetLoad(true); // temp
-        }
+        private void Start() => InitCrossButton();
 
         private void Update() => UpdateLoading();
-        
+
         /// <summary>
-        /// 
+        /// Set the load property and timer can count, if false then the button will disable.
         /// </summary>
-        /// <param name="target"></param>
+        /// <param name="target">The value to set it to</param>
         public void SetLoad(bool target)
         {
             _canLoad = target;
+            timer.SetCanCount(_canLoad);
             
             if(!_canLoad)
                 button.enabled = false;
@@ -42,6 +42,7 @@ namespace UI.Ads
                 button = GetComponent<Button>();
             
             button.enabled = false;
+            SetLoad(false);
         }
         
         private void UpdateLoading()
@@ -49,10 +50,13 @@ namespace UI.Ads
             if(!_canLoad)
                 return;
             
-            cross.fillAmount = 1 - timer.GetCurrentTimerPercentage();// here an extra timer is needed and the main timer for turning on and off
+            cross.fillAmount = 1 - timer.GetCurrentTimerPercentage();
 
-            // if (Math.Abs(cross.fillAmount - 1) < 0.01f)
-                button.enabled = Math.Abs(cross.fillAmount - 1) < 0.01f;
+            if (!(Math.Abs(cross.fillAmount - 1) < 0.01f)) 
+                return;
+            
+            button.enabled = true;
+            timer.SetCanCount(false);
         }
     }
 }
