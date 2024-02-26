@@ -1,32 +1,33 @@
-using System;
-using FrameWork.GridSystem;
+using Framework;
+using Framework.GridPoints;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player.Movement
 {
-    public sealed class PlayerMovement : Framework.Movement
+    public sealed class PlayerMovement : BaseMovement
     {
+        [SerializeField] private UnityEvent activateMovingProtocol = new();
+        
         /// <summary>
-        /// Calls the coroutine to start moving the player from it's current position to a newly assigned one.
+        /// Converts the Enums into an integer to be called in a Unity Event.
         /// </summary>
-        public void StartMoving(int playerPoints)
+        /// <param name="playerPoints">Enum</param>
+        public void StartMoving(int playerPoints) => StartMoving((PlayerPoints)playerPoints);
+        
+        /// <summary>
+        /// Moves the player from it's starting position towards the newly designated position.
+        /// </summary>
+        /// <param name="targetPoint"></param>
+        public void StartMoving(PlayerPoints targetPoint)
         {
-            PlayerPoints points = (PlayerPoints)playerPoints;
-            switch (points)
-            {
-                case PlayerPoints.POINT_A:
-                    StartCoroutine(MoveTowardsGridPoint(PlayerPoints.POINT_A));
-                    break;
-                case PlayerPoints.POINT_B:
-                    StartCoroutine(MoveTowardsGridPoint(PlayerPoints.POINT_B));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            onStartedMoving?.Invoke();
+            StartCoroutine(MoveTowardsGridPoint(targetPoint));
         }
 
         /// <summary>
         /// Starts a unity event to call the coroutine for moving the player. This allows for us to choose which point the player moves with unity events
         /// </summary>
-        public void StartMovingEvent() => onStartedMoving.Invoke();
+        public void StartMovingEvent() => activateMovingProtocol.Invoke();
     }
 }

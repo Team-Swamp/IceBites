@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Framework
 {
-    public abstract class Movement : MonoBehaviour
+    public abstract class BaseMovement : MonoBehaviour
     {
         [SerializeField,Range(1,10)] protected float p_movementSpeed; 
 
@@ -24,18 +24,11 @@ namespace Framework
         /// <returns></returns>
         protected IEnumerator MoveTowardsGridPoint<T>(T points) where T: Enum
         {
-            if (!_isMoving)
+            Vector3 newPos = points.GetVector3();
+            while (transform.position != newPos)
             {
-                
-                Vector3 newPos = points.GetVector3();
-                while (!newPos.Compare(transform.position))
-                {
-                    _isMoving = true;
-                    transform.position = Vector3.MoveTowards(transform.position, newPos, p_movementSpeed * Time.deltaTime);
-                    yield return null;
-                }
-
-                _isMoving = false;
+                transform.position = Vector3.MoveTowards(transform.position, newPos, p_movementSpeed * Time.deltaTime);
+                yield return null;
             }
         } 
     }

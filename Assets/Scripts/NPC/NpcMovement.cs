@@ -1,21 +1,18 @@
 using System;
 using System.Collections;
 using Framework;
-using FrameWork.GridSystem;
+using Framework.GridPoints;
 using UnityEngine;
 
 namespace NPC
 {
-    public sealed class NpcMovement : Movement
+    public sealed class NpcMovement : BaseMovement
     {
-        
-
         private void Start() => StartCoroutine(MovingNpc());
         
         public void MoveNpc(int points)
         {
             NpcPoints npcPoints = (NpcPoints)points;
-
             switch (npcPoints)
             {
                 case NpcPoints.NPC_STARTING_POINT:
@@ -28,13 +25,13 @@ namespace NPC
                     throw new ArgumentOutOfRangeException();
             }
         }
-
+        
         private IEnumerator MovingNpc()
         {
             while (true)
             {
                 MoveNpc(1);
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(1);
                 MoveNpc(0);
             }
         }
