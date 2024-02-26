@@ -3,15 +3,12 @@ using System.Collections;
 using FrameWork.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Framework
 {
     public abstract class BaseMovement : MonoBehaviour
     {
         [SerializeField,Range(1,10)] protected float p_movementSpeed; 
-
-        private bool _isMoving;
         
         [SerializeField] protected UnityEvent onStartedMoving = new();
         [SerializeField] protected UnityEvent onStopMoving = new();
@@ -30,6 +27,7 @@ namespace Framework
                 transform.position = Vector3.MoveTowards(transform.position, newPos, p_movementSpeed * Time.deltaTime);
                 yield return null;
             }
+            onStopMoving?.Invoke();
         } 
     }
 }
