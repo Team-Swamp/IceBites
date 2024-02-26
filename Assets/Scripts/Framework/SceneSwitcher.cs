@@ -14,8 +14,15 @@ namespace FrameWork
                 LoadScene();
         }
 
+        /// <summary>
+        /// Load the scene that is set (sceneToLoad property).
+        /// </summary>
         public void LoadScene() => SceneManager.LoadScene(sceneToLoad);
 
+        /// <summary>
+        /// Set the sceneToLoad property to a new scene, if it's not in the build settings you will get an error.
+        /// </summary>
+        /// <param name="targetScene"></param>
         public void SetSceneToLoad(string targetScene)
         {
             if (SceneExists(targetScene))
