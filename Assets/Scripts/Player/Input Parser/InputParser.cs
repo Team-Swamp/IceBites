@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Player.Input_Parser
 {
-    public class InputParser : MonoBehaviour
+    public sealed class InputParser : MonoBehaviour
     {
         private PlayerInput _playerInput;
         private InputActionAsset _inputActionAsset;
