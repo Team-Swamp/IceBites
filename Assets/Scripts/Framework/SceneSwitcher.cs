@@ -16,6 +16,8 @@ namespace FrameWork
 
         public void LoadScene() => SceneManager.LoadScene(sceneToLoad);
 
+        public void LoadSceneAsync() => SceneManager.LoadSceneAsync(sceneToLoad);
+
         public void SetSceneToLoad(string targetScene)
         {
             if (SceneExists(targetScene))
