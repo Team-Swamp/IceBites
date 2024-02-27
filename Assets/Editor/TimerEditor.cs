@@ -10,8 +10,10 @@ namespace Editor
         private SerializedProperty _startingTime;
         private SerializedProperty _timerThreshold;
         private SerializedProperty _canCount;
+        private SerializedProperty _canCountOnAwake;
         private SerializedProperty _onTimerDone;
         private SerializedProperty _onTimerPassedThreshold;
+        private SerializedProperty _onStart;
         private SerializedProperty _onReset;
 
         /// <summary>
@@ -23,6 +25,7 @@ namespace Editor
     
             EditorGUILayout.LabelField("Set up", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_isCountingUp);
+            EditorGUILayout.PropertyField(_canCountOnAwake);
             
             EditorGUILayout.LabelField("Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_isCountingUp.boolValue ? _timerThreshold : _startingTime);
@@ -31,6 +34,7 @@ namespace Editor
             EditorGUILayout.Space(20);
             EditorGUILayout.LabelField("Events", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(_isCountingUp.boolValue ? _onTimerPassedThreshold : _onTimerDone);
+            EditorGUILayout.PropertyField(_onStart);
             EditorGUILayout.PropertyField(_onReset);
     
             serializedObject.ApplyModifiedProperties();
@@ -42,8 +46,10 @@ namespace Editor
             _startingTime = serializedObject.FindProperty("startingTime");
             _timerThreshold = serializedObject.FindProperty("timerThreshold");
             _canCount = serializedObject.FindProperty("canCount");
+            _canCountOnAwake = serializedObject.FindProperty("canCountOnAwake");
             _onTimerDone = serializedObject.FindProperty("onTimerDone");
             _onTimerPassedThreshold = serializedObject.FindProperty("onTimerPassedThreshold");
+            _onStart = serializedObject.FindProperty("onStart");
             _onReset = serializedObject.FindProperty("onReset");
         }
     }

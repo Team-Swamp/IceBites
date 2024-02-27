@@ -64,6 +64,11 @@ namespace FrameWork.Extensions
             return attribute?.Value ?? Vector3.zero;
         }
         
+        /// <summary>
+        /// Retrieves a random enum value of the specified type.
+        /// </summary>
+        /// <typeparam name="T">The enum type.</typeparam>
+        /// <returns>A random enum value of type T.</returns>
         public static T GetRandomEnumValue<T>()
         {
             Array enumValues = Enum.GetValues(typeof(T));
