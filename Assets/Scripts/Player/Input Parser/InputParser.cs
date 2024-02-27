@@ -1,9 +1,7 @@
-using System;
-using OpenCover.Framework.Model;
 using Player.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Processors;
+using FrameWork;
 
 namespace Player.Input_Parser
 {
@@ -12,16 +10,15 @@ namespace Player.Input_Parser
         private PlayerInput _playerInput;
         private InputActionAsset _inputActionAsset;
         private PlayerMovement _playerMovement;
-        private InteractableObject _interactableObject;
 
         private Camera _mainCamera;
+        private const string INTERACTABLE_TAG = "Interactable";
 
         private void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
             _inputActionAsset = _playerInput.actions;
             _playerMovement = GetComponent<PlayerMovement>();
-            _interactableObject = GetComponent<InteractableObject>();
             _mainCamera = Camera.main;
             
             AddListeners();
@@ -47,10 +44,13 @@ namespace Player.Input_Parser
         private void MoveTowards(InputAction.CallbackContext context) => _playerMovement.StartMoving();
 
         private void Interact(InputAction.CallbackContext context)
-        { 
-            Debug.Log("Set point");
+        {
             Ray ray = _mainCamera.ScreenPointToRay(SetMousePos());
-            Debug.DrawRay(ray.origin, ray.direction *10, Color.green);
+            Physics.Raycast(ray.origin, ray.direction *10, out RaycastHit hit);
+            
+            if (hit.collider
+                && hit.collider.CompareTag(INTERACTABLE_TAG))
+                hit.collider.transform.GetComponent<InteractableObject>().onInteract.Invoke();
         }
 
         private Vector3 SetMousePos()
