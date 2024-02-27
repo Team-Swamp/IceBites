@@ -1,36 +1,33 @@
-using System;
-using System.Collections;
-using FrameWork.Extensions;
-using FrameWork.GridSystem;
+using Framework;
+using Framework.GridPoints;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player.Movement
 {
-    public class PlayerMovement : MonoBehaviour
-    { 
-        [SerializeField, Range(1,10)] private float movementSpeed;
+    public sealed class PlayerMovement : BaseMovement
+    {
+        [SerializeField] private UnityEvent activateMovingProtocol = new();
         
-        private int _enumLength;
-        private int _gridIndex;
-
-        private void Awake()=> _enumLength = Enum.GetNames(typeof(GridPoints)).Length;
-        
-        private IEnumerator MoveTowardsGridPoint()
-        {
-            _gridIndex = (_gridIndex + 1) % _enumLength;
-            GridPoints nextpoint = (GridPoints) _gridIndex;
-
-            Vector3 newPos;
-            newPos = nextpoint.GetVector3();
-            while (transform.position != newPos)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, newPos, movementSpeed * Time.deltaTime);
-                yield return null;
-            }
-        }
         /// <summary>
-        /// Starts the coroutine to start moving the player from point A > The next point
+        /// Converts the Enums into an integer to be called in a Unity Event.
         /// </summary>
-        public void StartMoving() => StartCoroutine(MoveTowardsGridPoint());
+        /// <param name="playerPoints">Enum</param>
+        public void StartMoving(int playerPoints) => StartMoving((PlayerPoints)playerPoints);
+        
+        /// <summary>
+        /// Moves the player from it's starting position towards the newly designated position.
+        /// </summary>
+        /// <param name="targetPoint"></param>
+        public void StartMoving(PlayerPoints targetPoint)
+        {
+            onStartedMoving?.Invoke();
+            StartCoroutine(MoveTowardsGridPoint(targetPoint));
+        }
+
+        /// <summary>
+        /// Starts a unity event to call the coroutine for moving the player. This allows for us to choose which point the player moves with unity events
+        /// </summary>
+        public void StartMovingEvent() => activateMovingProtocol.Invoke();
     }
 }

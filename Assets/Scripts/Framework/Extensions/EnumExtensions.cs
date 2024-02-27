@@ -2,10 +2,10 @@
 using System.Reflection;
 using UnityEngine;
 using FrameWork.Attributes;
+using Random = System.Random;
 
 namespace FrameWork.Extensions
 {
-
     public static class EnumExtensions
     {
         /// <summary>
@@ -62,6 +62,18 @@ namespace FrameWork.Extensions
             Vector3Value attribute = (Vector3Value)Attribute.GetCustomAttribute(fieldInfo, typeof(Vector3Value));
 
             return attribute?.Value ?? Vector3.zero;
+        }
+        
+        /// <summary>
+        /// Retrieves a random enum value of the specified type.
+        /// </summary>
+        /// <typeparam name="T">The enum type.</typeparam>
+        /// <returns>A random enum value of type T.</returns>
+        public static T GetRandomEnumValue<T>()
+        {
+            Array enumValues = Enum.GetValues(typeof(T));
+            Random random = new Random();
+            return (T)enumValues.GetValue(random.Next(enumValues.Length));
         }
     }
 }

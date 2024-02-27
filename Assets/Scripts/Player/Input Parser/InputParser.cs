@@ -5,7 +5,7 @@ using FrameWork;
 
 namespace Player.Input_Parser
 {
-    public class InputParser : MonoBehaviour
+    public sealed class InputParser : MonoBehaviour
     {
         private PlayerInput _playerInput;
         private InputActionAsset _inputActionAsset;
@@ -23,7 +23,7 @@ namespace Player.Input_Parser
             
             AddListeners();
         }
-
+        
         private void OnDisable()
         {
             RemoveListeners();
@@ -41,7 +41,7 @@ namespace Player.Input_Parser
             _inputActionAsset["Interact"].performed -= Interact;
         }
 
-        private void MoveTowards(InputAction.CallbackContext context) => _playerMovement.StartMoving();
+        private void MoveTowards(InputAction.CallbackContext context) => _playerMovement.StartMovingEvent();
 
         private void Interact(InputAction.CallbackContext context)
         {
