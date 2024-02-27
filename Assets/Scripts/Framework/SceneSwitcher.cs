@@ -22,7 +22,7 @@ namespace FrameWork
         /// <summary>
         /// Set the sceneToLoad property to a new scene, if this succeeds it will load it, otherwise it will give an error.
         /// </summary>
-        /// <param name="targetScene"></param>
+        /// <param name="targetScene">The target scene to load.</param>
         public void SetAndLoadScene(string targetScene)
         {
             if(SetSceneToLoad(targetScene))
@@ -32,7 +32,8 @@ namespace FrameWork
         /// <summary>
         /// Set the sceneToLoad property to a new scene, if it's not in the build settings you will get an error.
         /// </summary>
-        /// <param name="targetScene"></param>
+        /// <param name="targetScene">The target scene to set as sceneToLoad.</param>
+        /// <returns>When succeeding the scene is set. Otherwise not with an error.</returns>>
         public bool SetSceneToLoad(string targetScene)
         {
             if (SceneExists(targetScene))
