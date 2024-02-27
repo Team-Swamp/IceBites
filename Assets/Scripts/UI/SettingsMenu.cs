@@ -21,8 +21,7 @@ namespace UI
 
         private void Awake()
         {
-            
-            progressSlider.value = _sceneSwitcher.Progress;
+            if (progressSlider != null) progressSlider.value = _sceneSwitcher.Progress;
             LoadSettings();
         }
 
