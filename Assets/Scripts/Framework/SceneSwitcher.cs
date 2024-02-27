@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace FrameWork
 {
@@ -7,6 +9,8 @@ namespace FrameWork
     {
         [SerializeField] private bool loadSceneInAwake;
         [SerializeField] private string sceneToLoad;
+
+        public float Progress;
 
         private void Awake()
         {
@@ -18,7 +22,31 @@ namespace FrameWork
         /// Load the scene that is set (sceneToLoad property).
         /// </summary>
         public void LoadScene() => SceneManager.LoadScene(sceneToLoad);
+        
+        /// <summary>
+        /// Loads the scene that is set Asynchronously (sceneToLoad property).
+        /// </summary>S
+        IEnumerator LoadSceneAsync()
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
 
+            while (!operation.isDone)
+            {
+                Progress = Mathf.Clamp01(operation.progress / 0.9f);
+                yield return null;
+            }
+        }
+
+        /// <summary>
+        /// Set the sceneToLoad property to a new scene, if this succeeds it will load it asynchronously. Otherwise it will give an error.
+        /// </summary>
+        /// <param name="targetScene">The target scene to load.</param>
+        public void SetAndLoadAsyncScene(string targetScene)
+        {
+            if(SetSceneToLoad(targetScene))
+                StartCoroutine(LoadSceneAsync());
+        }
+        
         /// <summary>
         /// Set the sceneToLoad property to a new scene, if this succeeds it will load it, otherwise it will give an error.
         /// </summary>

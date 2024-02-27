@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FrameWork;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -12,12 +13,16 @@ namespace UI
         [SerializeField] private TMP_Dropdown graphicsDropdown;
         [SerializeField] private TMP_Dropdown resolutionsDropdown;
         [SerializeField] private Slider slider;
+        [SerializeField] private Slider progressSlider;
+        [SerializeField] private bool customSettings;
+        [SerializeField] private SceneSwitcher _sceneSwitcher;
 
         private Resolution[] _resolution;
-        [SerializeField] private bool customSettings;
 
         private void Awake()
         {
+            
+            progressSlider.value = _sceneSwitcher.Progress;
             LoadSettings();
         }
 
