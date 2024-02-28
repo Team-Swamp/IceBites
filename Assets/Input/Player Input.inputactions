@@ -15,6 +15,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "PauseGame",
+                    "type": "Button",
+                    "id": "d4f508e9-ad9b-47b2-8471-8454307000e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "abcab14a-620a-4ab8-a0a2-654b653e5ec0",
@@ -42,6 +51,16 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveTowards",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "id": "f7243783-1c5e-4f9d-91fe-7b235cb4d311",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -88,7 +107,7 @@
                     "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
+                },
             ]
         }
     ],

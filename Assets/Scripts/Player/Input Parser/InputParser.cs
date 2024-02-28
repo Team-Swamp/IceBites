@@ -1,5 +1,7 @@
 using System;
 using Player.Movement;
+using UI;
+using UI.Menus;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using FrameWork;
@@ -13,6 +15,8 @@ namespace Player.Input_Parser
         private PlayerInput _playerInput;
         private InputActionAsset _inputActionAsset;
         private PlayerMovement _playerMovement;
+        private SwitchMenus _switchMenus;
+        private const string CANVAS = "Canvas";
 
         private Camera _mainCamera;
         private InteractableObject _lastObject;
@@ -30,11 +34,13 @@ namespace Player.Input_Parser
         {
             _playerInput = GetComponent<PlayerInput>();
             _playerMovement = GetComponent<PlayerMovement>();
+            _switchMenus = canvas.GetComponent<SwitchMenus>();
         }
 
         private void Init()
         {
             _inputActionAsset = _playerInput.actions;
+            GameObject canvas = GameObject.Find(CANVAS);
             _mainCamera = Camera.main;
         }
         
@@ -46,16 +52,20 @@ namespace Player.Input_Parser
         private void AddListeners()
         {
             _inputActionAsset["MoveTowards"].performed += MoveTowards;
+            _inputActionAsset["PauseGame"].performed += PauseGame;
             _inputActionAsset["Interact"].performed += Interact;
         }
 
         private void RemoveListeners()
         {
             _inputActionAsset["MoveTowards"].performed -= MoveTowards;
+            _inputActionAsset["PauseGame"].performed -= PauseGame;
             _inputActionAsset["Interact"].performed -= Interact;
         }
 
         private void MoveTowards(InputAction.CallbackContext context) => _playerMovement.StartMovingEvent();
+
+        private void PauseGame(InputAction.CallbackContext context) => _switchMenus.PausingEvent();
 
         private void Interact(InputAction.CallbackContext context)
         {
