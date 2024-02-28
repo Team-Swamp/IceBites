@@ -1,3 +1,4 @@
+using System;
 using Player.Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,21 +8,34 @@ namespace Player.Input_Parser
 {
     public sealed class InputParser : MonoBehaviour
     {
+        [SerializeField, Range(0, 20)] private float interactableRayDistance;
+        
         private PlayerInput _playerInput;
         private InputActionAsset _inputActionAsset;
         private PlayerMovement _playerMovement;
 
         private Camera _mainCamera;
+        private InteractableObject _lastObject;
         private const string INTERACTABLE_TAG = "Interactable";
 
         private void Awake()
         {
-            _playerInput = GetComponent<PlayerInput>();
-            _inputActionAsset = _playerInput.actions;
-            _playerMovement = GetComponent<PlayerMovement>();
-            _mainCamera = Camera.main;
+            GetReferences();
+            Init();
             
             AddListeners();
+        }
+
+        private void GetReferences()
+        {
+            _playerInput = GetComponent<PlayerInput>();
+            _playerMovement = GetComponent<PlayerMovement>();
+        }
+
+        private void Init()
+        {
+            _inputActionAsset = _playerInput.actions;
+            _mainCamera = Camera.main;
         }
         
         private void OnDisable()
@@ -46,11 +60,17 @@ namespace Player.Input_Parser
         private void Interact(InputAction.CallbackContext context)
         {
             Ray ray = _mainCamera.ScreenPointToRay(SetMousePos());
-            Physics.Raycast(ray.origin, ray.direction *10, out RaycastHit hit);
-            
+            Physics.Raycast(ray.origin, ray.direction * interactableRayDistance, out RaycastHit hit);
+
             if (hit.collider
                 && hit.collider.CompareTag(INTERACTABLE_TAG))
-                hit.collider.transform.GetComponent<InteractableObject>().onInteract.Invoke();
+            {
+                if (_lastObject == null
+                    || _lastObject.transform != hit.collider.transform)
+                    _lastObject = hit.collider.GetComponent<InteractableObject>();
+                
+                _lastObject.onInteract.Invoke();
+            }
         }
 
         private Vector3 SetMousePos()
