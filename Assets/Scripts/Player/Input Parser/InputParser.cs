@@ -10,17 +10,18 @@ namespace Player.Input_Parser
 {
     public sealed class InputParser : MonoBehaviour
     {
+        private const string CANVAS = "Canvas";
+        private const string INTERACTABLE_TAG = "Interactable";
+        
         [SerializeField, Range(0, 20)] private float interactableRayDistance;
         
+        private Camera _mainCamera;
         private PlayerInput _playerInput;
         private InputActionAsset _inputActionAsset;
         private PlayerMovement _playerMovement;
         private SwitchMenus _switchMenus;
-        private const string CANVAS = "Canvas";
+        private InteractableObject _lastInteractable;
 
-        private Camera _mainCamera;
-        private InteractableObject _lastObject;
-        private const string INTERACTABLE_TAG = "Interactable";
 
         private void Awake()
         {
@@ -34,13 +35,13 @@ namespace Player.Input_Parser
         {
             _playerInput = GetComponent<PlayerInput>();
             _playerMovement = GetComponent<PlayerMovement>();
+            GameObject canvas = GameObject.Find(CANVAS);
             _switchMenus = canvas.GetComponent<SwitchMenus>();
         }
 
         private void Init()
         {
             _inputActionAsset = _playerInput.actions;
-            GameObject canvas = GameObject.Find(CANVAS);
             _mainCamera = Camera.main;
         }
         
@@ -69,24 +70,20 @@ namespace Player.Input_Parser
 
         private void Interact(InputAction.CallbackContext context)
         {
-            Ray ray = _mainCamera.ScreenPointToRay(SetMousePos());
+            Ray ray = _mainCamera.ScreenPointToRay(GetMousePosition());
             Physics.Raycast(ray.origin, ray.direction * interactableRayDistance, out RaycastHit hit);
 
             if (hit.collider
                 && hit.collider.CompareTag(INTERACTABLE_TAG))
             {
-                if (_lastObject == null
-                    || _lastObject.transform != hit.collider.transform)
-                    _lastObject = hit.collider.GetComponent<InteractableObject>();
+                if (_lastInteractable == null
+                    || _lastInteractable.transform != hit.collider.transform)
+                    _lastInteractable = hit.collider.GetComponent<InteractableObject>();
                 
-                _lastObject.onInteract.Invoke();
+                _lastInteractable.onInteract.Invoke();
             }
         }
 
-        private Vector3 SetMousePos()
-        {
-            Vector2 mousePos = _inputActionAsset["MousePosition"].ReadValue<Vector2>();
-            return mousePos;
-        }
+        private Vector3 GetMousePosition() => (Vector3) _inputActionAsset["MousePosition"].ReadValue<Vector2>();
     }
 }

@@ -55,6 +55,7 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
                     "id": "f7243783-1c5e-4f9d-91fe-7b235cb4d311",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -107,7 +108,7 @@
                     "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
             ]
         }
     ],
