@@ -6,11 +6,12 @@ namespace FrameWork
 {
     public sealed class SceneSwitcher : MonoBehaviour
     {
+        private const double ASYNC_CONVERTER = 0.9;
+        
         [SerializeField] private bool loadSceneInAwake;
         [SerializeField] private string sceneToLoad;
 
         private float _progress;
-        private const double ASYNC_CONVERTER = 0.9;
 
         public float Progress
         {
@@ -31,7 +32,7 @@ namespace FrameWork
         
         /// <summary>
         /// Loads the scene that is set Asynchronously (sceneToLoad property).
-        /// </summary>S
+        /// </summary>
         private IEnumerator LoadSceneAsync()
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);

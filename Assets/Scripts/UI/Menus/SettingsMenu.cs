@@ -121,13 +121,11 @@ namespace UI.Menus
             int length = _resolution.Length;
             for (int i = 0; i < length; i++)
             {
-                if (_resolution[i].width == Screen.currentResolution.width && 
+                if (_resolution[i].width == Screen.currentResolution.width &&
                     _resolution[i].height == Screen.currentResolution.height)
-                {
                     return i;
-                }
             }
-
+            
             return 0;
         }
         
