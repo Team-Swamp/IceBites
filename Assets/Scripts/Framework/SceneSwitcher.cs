@@ -10,7 +10,7 @@ namespace FrameWork
         [SerializeField] private string sceneToLoad;
 
         private float _progress;
-        private const float ASYNC_CONVERTER = 0.9f;
+        private const double ASYNC_CONVERTER = 0.9;
 
         public float Progress
         {
@@ -38,7 +38,7 @@ namespace FrameWork
 
             while (!operation.isDone)
             {
-                Progress = Mathf.Clamp01(operation.progress / ASYNC_CONVERTER);
+                Progress = Mathf.Clamp01(operation.progress / (float) ASYNC_CONVERTER);
                 yield return null;
             }
         }
