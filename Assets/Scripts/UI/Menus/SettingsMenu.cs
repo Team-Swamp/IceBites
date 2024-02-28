@@ -55,17 +55,14 @@ namespace UI.Menus
         #endregion
 
         #region Settings
-                public void ApplySettings()
+        
+        /// <summary>
+        /// Apply's all settings and makes sure these don't get reset
+        /// </summary>
+        public void ApplySettings()
         {
             customSettings = true;
             PlayerPrefs.SetInt("CustomSettings", customSettings ? 1 : 0);
-        }
-
-        private void SetHighestQuality()
-        {
-            int highestQuality = QualitySettings.GetQualityLevel();
-            QualitySettings.SetQualityLevel(highestQuality);
-            graphicsDropdown.value = highestQuality;
         }
 
         /// <summary>
@@ -111,6 +108,13 @@ namespace UI.Menus
             resolutionsDropdown.value = resolutionIndex;
             PlayerPrefs.SetInt("Resolution", resolutionIndex);
         }
+        
+        private void SetHighestQuality()
+        {
+            int highestQuality = QualitySettings.GetQualityLevel();
+            QualitySettings.SetQualityLevel(highestQuality);
+            graphicsDropdown.value = highestQuality;
+        }
 
         private int GetDefaultResolution()
         {
@@ -126,6 +130,7 @@ namespace UI.Menus
 
             return 0;
         }
+        
         private void PopulateResolutions()
         {
             _resolution = Screen.resolutions;
@@ -133,8 +138,9 @@ namespace UI.Menus
 
             List<string> options = new List<string>();
             int currentResolution = 0;
+            int length = _resolution.Length;
             
-            for (int i = 0; i < _resolution.Length; i++)
+            for (int i = 0; i < length; i++)
             {
                 string option = $"{_resolution[i].width}x{_resolution[i].height}";
                 options.Add(option);

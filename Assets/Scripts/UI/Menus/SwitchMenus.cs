@@ -24,7 +24,7 @@ namespace UI.Menus
         /// <summary>
         /// This will either stop or resume the time in game allowing for a correct pause.
         /// </summary>
-        public void PauseGame()
+        public void TogglePauseGame()
         {
             _isPaused = !_isPaused;
             Time.timeScale = _isPaused ? 0f : 1f;
