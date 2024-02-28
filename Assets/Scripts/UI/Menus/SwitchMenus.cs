@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UI
+namespace UI.Menus
 {
-    public class SwitchMenus : MonoBehaviour
+    public sealed class SwitchMenus : MonoBehaviour
     {
-        [SerializeField] private UnityEvent pausingGame = new();
         private bool _isPaused;
+        
+        [SerializeField] private UnityEvent pausingGame = new();
+        
         /// <summary>
         /// This hides a certain gameobject.
         /// </summary>
@@ -28,9 +30,13 @@ namespace UI
             Time.timeScale = _isPaused ? 0f : 1f;
         }
         
+        /// <summary>
+        /// This checks if the game is already paused, if not it will pause.
+        /// </summary>
         public void PausingEvent()
         {
-            if(!_isPaused) pausingGame?.Invoke();
+            if(!_isPaused) 
+                pausingGame?.Invoke();
         }
     }
 }

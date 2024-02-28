@@ -1,5 +1,6 @@
 using Player.Movement;
 using UI;
+using UI.Menus;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,13 +12,14 @@ namespace Player.Input_Parser
         private InputActionAsset _inputActionAsset;
         private PlayerMovement _playerMovement;
         private SwitchMenus _switchMenus;
+        private const string CANVAS = "Canvas";
 
         private void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
             _inputActionAsset = _playerInput.actions;
             _playerMovement = GetComponent<PlayerMovement>();
-            GameObject canvas = GameObject.Find("Canvas");
+            GameObject canvas = GameObject.Find(CANVAS);
             _switchMenus = canvas.GetComponent<SwitchMenus>();
 
             AddListeners();

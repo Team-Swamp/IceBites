@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace FrameWork
 {
@@ -10,7 +9,14 @@ namespace FrameWork
         [SerializeField] private bool loadSceneInAwake;
         [SerializeField] private string sceneToLoad;
 
-        public float Progress;
+        private float _progress;
+        private const float ASYNC_CONVERTER = 0.9f;
+
+        public float Progress
+        {
+            get => _progress;
+            private set => _progress = value;
+        }
 
         private void Awake()
         {
@@ -26,13 +32,13 @@ namespace FrameWork
         /// <summary>
         /// Loads the scene that is set Asynchronously (sceneToLoad property).
         /// </summary>S
-        IEnumerator LoadSceneAsync()
+        private IEnumerator LoadSceneAsync()
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
 
             while (!operation.isDone)
             {
-                Progress = Mathf.Clamp01(operation.progress / 0.9f);
+                Progress = Mathf.Clamp01(operation.progress / ASYNC_CONVERTER);
                 yield return null;
             }
         }

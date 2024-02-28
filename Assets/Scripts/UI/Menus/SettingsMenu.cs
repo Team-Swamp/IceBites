@@ -5,23 +5,27 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Slider = UnityEngine.UI.Slider;
 
-namespace UI
+namespace UI.Menus
 {
-    public class SettingsMenu : MonoBehaviour
+    public sealed class SettingsMenu : MonoBehaviour
     {
+        [Header("UI Elements")]
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private TMP_Dropdown graphicsDropdown;
         [SerializeField] private TMP_Dropdown resolutionsDropdown;
         [SerializeField] private Slider slider;
         [SerializeField] private Slider progressSlider;
+        [Header("Saving")]
         [SerializeField] private bool customSettings;
-        [SerializeField] private SceneSwitcher _sceneSwitcher;
+        [Header("Scene Switcher")]
+        [SerializeField] private SceneSwitcher sceneSwitcher;
 
         private Resolution[] _resolution;
 
         private void Awake()
         {
-            if (progressSlider != null) progressSlider.value = _sceneSwitcher.Progress;
+            if (progressSlider != null) 
+                progressSlider.value = sceneSwitcher.Progress;
             LoadSettings();
         }
 
@@ -47,7 +51,6 @@ namespace UI
             SetQuality(quality);
             SetFullscreen(fullscreen);
             SetResolution(resolution);
-            
         }
         #endregion
 
@@ -111,7 +114,8 @@ namespace UI
 
         private int GetDefaultResolution()
         {
-            for (int i = 0; i < _resolution.Length; i++)
+            int length = _resolution.Length;
+            for (int i = 0; i < length; i++)
             {
                 if (_resolution[i].width == Screen.currentResolution.width && 
                     _resolution[i].height == Screen.currentResolution.height)
