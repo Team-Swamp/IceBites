@@ -14,9 +14,9 @@ namespace NPC
         {
             while (true)
             {
-                StartCoroutine(MoveTowardsGridPoint(NpcPoints.NPC_COUNTER_POINT));
+                yield return StartCoroutine(MoveTowardsGridPoint(NpcPoints.NPC_COUNTER_POINT));
                 yield return new WaitForSeconds(1);
-                StartCoroutine(MoveTowardsGridPoint(NpcPoints.NPC_STARTING_POINT));
+                yield return StartCoroutine(MoveTowardsGridPoint(NpcPoints.NPC_STARTING_POINT));
                 
             }
         }
