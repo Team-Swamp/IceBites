@@ -15,7 +15,7 @@ namespace Framework.Cooking
         /// <summary>
         /// Add an ingredient to a dish. If it's the second one it will transform into a dish model.
         /// </summary>
-        /// <param name="target"></param>
+        /// <param name="target">The target IngredientObject to add</param>
         public void AddIngredient(IngredientObject target)
         {
             if (ingredients.Count >= 2 

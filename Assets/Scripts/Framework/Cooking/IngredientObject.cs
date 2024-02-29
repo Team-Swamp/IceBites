@@ -53,7 +53,7 @@ namespace Framework.Cooking
         /// <summary>
         /// Cooks the fish.
         /// </summary>
-        /// <param name="fish"></param>
+        /// <param name="fish">The IngredientObject that should be a raw fish</param>
         public void CookFish(IngredientObject fish)
         {
             if (fish.ingredient != Ingredient.FISH_RAW)

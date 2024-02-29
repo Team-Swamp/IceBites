@@ -22,7 +22,7 @@ namespace Framework.Cooking
         /// <summary>
         /// Set the current ingredient if there is none
         /// </summary>
-        /// <param name="targetIngredient"></param>
+        /// <param name="targetIngredient">The target ingredient to set as current.</param>
         public void SetIngredient(IngredientObject targetIngredient)
         {
             if(ingredientObject != null)
