@@ -17,8 +17,18 @@ namespace Framework.Cooking
         [SerializeField] private UnityEvent onBeingPrepared = new();
         [SerializeField] private UnityEvent onCooked = new();
 
+        /// <summary>
+        /// Calls the ChangeState(IngredientState) with converting the int.
+        /// </summary>
+        /// <param name="targetState">The target state</param>
         public void ChangeState(int targetState) => ChangeState((IngredientState) targetState);
         
+        /// <summary>
+        /// Change the state to the next.
+        /// RAW => BEING_PREPARED
+        /// BEING_PREPARED => COOKED
+        /// </summary>
+        /// <param name="targetState">The target state</param>
         public void ChangeState(IngredientState targetState)
         {
             switch (_state)
@@ -40,6 +50,10 @@ namespace Framework.Cooking
             }
         }
 
+        /// <summary>
+        /// Cooks the fish.
+        /// </summary>
+        /// <param name="fish"></param>
         public void CookFish(IngredientObject fish)
         {
             if (fish.ingredient != Ingredient.FISH_RAW)

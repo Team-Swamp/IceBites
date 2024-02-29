@@ -26,6 +26,9 @@ namespace Framework
             }
         }
 
+        /// <summary>
+        /// If there is an instance, this will destroy itself, otherwise it becomes the instance.
+        /// </summary>
         protected virtual void Awake()
         {
             if (_instance != null)

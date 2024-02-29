@@ -34,9 +34,9 @@ namespace Player.Input_Parser
         private void GetReferences()
         {
             _playerInput = GetComponent<PlayerInput>();
-            // _playerMovement = GetComponent<PlayerMovement>();
-            // GameObject canvas = GameObject.Find(CANVAS);
-            // _switchMenus = canvas.GetComponent<SwitchMenus>();
+            _playerMovement = GetComponent<PlayerMovement>();
+            GameObject canvas = GameObject.Find(CANVAS);
+            _switchMenus = canvas.GetComponent<SwitchMenus>();
         }
 
         private void Init()

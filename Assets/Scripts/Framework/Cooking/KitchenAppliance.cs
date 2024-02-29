@@ -19,6 +19,10 @@ namespace Framework.Cooking
                 _timer = GetComponent<Timer>();
         }
 
+        /// <summary>
+        /// Set the current ingredient if there is none
+        /// </summary>
+        /// <param name="targetIngredient"></param>
         public void SetIngredient(IngredientObject targetIngredient)
         {
             if(ingredientObject != null)
@@ -31,11 +35,28 @@ namespace Framework.Cooking
             Grill();
         }
 
+        /// <summary>
+        /// Remove the current ingredient, sets it to null
+        /// </summary>
         public void RemoveIngredient() => ingredientObject = null;
 
-        public void ChangeCurrentIngredientState(int target) => ChangeCurrentIngredientState((IngredientState) target);
-        public void ChangeCurrentIngredientState(IngredientState target) => ingredientObject.ChangeState(target);
+        /// <summary>
+        /// Calls the ChangeState(IngredientState) with converting the int.
+        /// </summary>
+        /// <param name="targetState">The target state</param>
+        public void ChangeCurrentIngredientState(int targetState) => ChangeCurrentIngredientState((IngredientState) targetState);
         
+        /// <summary>
+        /// Change the state to the next.
+        /// RAW => BEING_PREPARED
+        /// BEING_PREPARED => COOKED
+        /// </summary>
+        /// <param name="targetState">The target state</param>
+        public void ChangeCurrentIngredientState(IngredientState targetState) => ingredientObject.ChangeState(targetState);
+        
+        /// <summary>
+        /// Cook the fish
+        /// </summary>
         public void CookFish() => ingredientObject.CookFish(ingredientObject);
         
         private void Grill()
