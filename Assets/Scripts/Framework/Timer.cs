@@ -113,10 +113,12 @@ namespace FrameWork
                 case false 
                 when _currentTimer <= 0:
                     onTimerDone?.Invoke();
+                    SetCanCount(false);
                     break;
                 case true 
                 when _currentTimer > timerThreshold:
                     onTimerPassedThreshold?.Invoke();
+                    SetCanCount(false);
                     break;
             }
         }

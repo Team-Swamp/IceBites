@@ -7,6 +7,8 @@ namespace Framework.Cooking
     public sealed class IngredientObject : MonoBehaviour
     {
         [SerializeField] private Ingredient ingredient;
+
+        [SerializeField] private Material cookedMat;
         
         private IngredientState _state;
 
@@ -36,6 +38,20 @@ namespace Framework.Cooking
                     Debug.LogError($"Invalid target state '{targetState}' when state is '{_state}'.");
                     break;
             }
+        }
+
+        public void CookFish(IngredientObject fish)
+        {
+            if (fish.ingredient != Ingredient.FISH_RAW)
+                return;
+            
+            fish.ingredient = Ingredient.FISH_COOKED;
+            SetMaterialCooked(fish);
+        }
+
+        private void SetMaterialCooked(IngredientObject fish)
+        {
+            GetComponent<MeshRenderer>().material = cookedMat;
         }
     }
 }

@@ -30,7 +30,13 @@ namespace Framework.Cooking
             
             if (!canMakeDish)
             {
-                Debug.LogWarning("Cannot make a dish with these ingredients.");
+                Debug.LogWarning($"Cannot make a dish with these ingredients. {ingredients[0]} {ingredients[1]}");
+                return;
+            }
+            
+            if (!dishToShow)
+            {
+                Debug.LogError($"Cannot show dish. {ingredients[0]} {ingredients[1]}");
                 return;
             }
 

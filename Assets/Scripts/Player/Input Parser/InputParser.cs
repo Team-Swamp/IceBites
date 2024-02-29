@@ -1,6 +1,4 @@
-using System;
 using Player.Movement;
-using UI;
 using UI.Menus;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,27 +25,24 @@ namespace Player.Input_Parser
         {
             GetReferences();
             Init();
-            
-            AddListeners();
         }
 
+        private void OnEnable() => AddListeners();
+
+        private void OnDisable() => RemoveListeners();
+        
         private void GetReferences()
         {
             _playerInput = GetComponent<PlayerInput>();
-            _playerMovement = GetComponent<PlayerMovement>();
-            GameObject canvas = GameObject.Find(CANVAS);
-            _switchMenus = canvas.GetComponent<SwitchMenus>();
+            // _playerMovement = GetComponent<PlayerMovement>();
+            // GameObject canvas = GameObject.Find(CANVAS);
+            // _switchMenus = canvas.GetComponent<SwitchMenus>();
         }
 
         private void Init()
         {
             _inputActionAsset = _playerInput.actions;
             _mainCamera = Camera.main;
-        }
-        
-        private void OnDisable()
-        {
-            RemoveListeners();
         }
 
         private void AddListeners()

@@ -28,14 +28,14 @@ namespace Framework
 
         protected virtual void Awake()
         {
-            if (_instance == null)
+            if (_instance != null)
             {
-                _instance = this as T;
-                DontDestroyOnLoad(this.gameObject);
+                Destroy(this.gameObject);
                 return;
             }
             
-            Destroy(this.gameObject);
+            _instance = this as T;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 }
