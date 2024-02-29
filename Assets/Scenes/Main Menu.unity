@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028386, g: 0.22571427, b: 0.3069231, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -230,7 +230,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadSceneInAwake: 0
   sceneToLoad: 
-  Progress: 0
 --- !u!4 &94352966
 Transform:
   m_ObjectHideFlags: 0
@@ -882,9 +881,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 170, y: 63}
+  m_AnchoredPosition: {x: 90, y: 155}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &333608857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2427,14 +2426,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818523497}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.13617155, y: -0, z: -0, w: 0.9906853}
+  m_LocalPosition: {x: 0, y: 6.71, z: -28.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.653, y: 0, z: 0}
 --- !u!1 &835867319
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,9 +2770,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -170, y: 63}
+  m_AnchoredPosition: {x: -90, y: 155}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &866700688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3532,6 +3531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a9dfa5e7851aa4686678f477cd982d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pausingGame:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &965198987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3550,7 +3552,7 @@ MonoBehaviour:
   slider: {fileID: 1846484875}
   progressSlider: {fileID: 595812366}
   customSettings: 0
-  _sceneSwitcher: {fileID: 94352965}
+  sceneSwitcher: {fileID: 0}
 --- !u!1 &996297131
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,7 +6059,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game name
+  m_text: Ice Bites
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6091,8 +6093,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
