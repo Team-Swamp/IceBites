@@ -13,6 +13,8 @@ namespace UI.Menus
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private TMP_Dropdown graphicsDropdown;
         [SerializeField] private TMP_Dropdown resolutionsDropdown;
+        [SerializeField] private TMP_Dropdown ratiosDropdown;
+        [SerializeField] private GameObject fullScreen;
         [SerializeField] private Slider slider;
         [SerializeField] private Slider progressSlider;
         [Header("Saving")]
@@ -26,20 +28,22 @@ namespace UI.Menus
         {
             if (progressSlider != null) 
                 progressSlider.value = sceneSwitcher.Progress;
+            
             LoadSettings();
         }
 
         #region Loading
+        
         /// <summary>
         /// This loads all the custom settings, if there are no custom settings it will run default settings.
         /// </summary>
         public void LoadSettings()
         {
-            if (Application.platform == RuntimePlatform.Android || 
-                Application.platform == RuntimePlatform.IPhonePlayer)
-            {
+            bool isMobile = Application.platform == RuntimePlatform.Android
+                            || Application.platform == RuntimePlatform.IPhonePlayer;
+            
+            if (isMobile)
                 LoadMobileSettings();
-            }
             
             PopulateResolutions();
             customSettings = PlayerPrefs.GetInt("CustomSettings", customSettings ? 1 : 0) == 1;
@@ -51,26 +55,44 @@ namespace UI.Menus
             }
             
             float volume = PlayerPrefs.GetFloat("Volume");
-            int quality = PlayerPrefs.GetInt("Quality", QualitySettings.GetQualityLevel());
             bool fullscreen = PlayerPrefs.GetInt("Fullscreen", Screen.fullScreen ? 1 : 0 ) == 1;
+            int quality = PlayerPrefs.GetInt("Quality", QualitySettings.GetQualityLevel());
             int resolution = PlayerPrefs.GetInt("Resolution", GetDefaultResolution());
+            int ratio = PlayerPrefs.GetInt("Ratio");
             
             SetVolume(volume);
             SetQuality(quality);
             SetFullscreen(fullscreen);
-            SetResolution(resolution);
+            
+            if (isMobile)
+                SetRatio(ratio);
+            else
+                SetResolution(resolution);
+        }
+
+        public void SetRatio() => SetRatio(ratiosDropdown.value);
+        
+        private void SetRatio(int ratio)
+        {
+            switch (ratio)
+            {
+                case 0:
+                    Screen.SetResolution(1920, 1080, Screen.fullScreen);
+                    break;
+                case 1:
+                    Screen.SetResolution(2560, 1080, Screen.fullScreen);
+                    break;
+                case 2:
+                    Screen.SetResolution(2400, 1080, Screen.fullScreen);
+                    break;
+                default:
+                    Debug.LogWarning("Unsupported aspect ratio.");
+                    return;
+            }
+            
+            PlayerPrefs.SetInt("Ratio", ratio);
         }
         
-        /// <summary>
-        /// Loads the correct settings for mobile
-        /// </summary>
-        public void LoadMobileSettings()
-        {
-            SetHighestQuality();
-            PlayerPrefs.DeleteAll();
-            resolutionsDropdown.gameObject.SetActive(false);
-            Screen.orientation = ScreenOrientation.LandscapeLeft;
-        }
         #endregion
 
         #region Settings
@@ -128,6 +150,14 @@ namespace UI.Menus
             PlayerPrefs.SetInt("Resolution", resolutionIndex);
         }
         
+        private void LoadMobileSettings()
+        {
+            SetHighestQuality();
+            PlayerPrefs.DeleteAll();
+            resolutionsDropdown.gameObject.SetActive(false);
+            fullScreen.SetActive(false);
+        }
+        
         private void SetHighestQuality()
         {
             int highestQuality = QualitySettings.GetQualityLevel();
@@ -166,7 +196,7 @@ namespace UI.Menus
             resolutionsDropdown.value = currentResolution;
             resolutionsDropdown.RefreshShownValue();
         }
-        #endregion
 
+        #endregion
     }
 }
