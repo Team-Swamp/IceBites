@@ -35,13 +35,23 @@ namespace UI.Menus
         /// </summary>
         public void LoadSettings()
         {
+            if (Application.platform == RuntimePlatform.Android || 
+                Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                SetHighestQuality();
+                PlayerPrefs.DeleteAll();
+                resolutionsDropdown.gameObject.SetActive(false);
+            }
+            
             PopulateResolutions();
             customSettings = PlayerPrefs.GetInt("CustomSettings", customSettings ? 1 : 0) == 1;
+            
             if (!customSettings)
             {
                 SetHighestQuality();
                 PlayerPrefs.DeleteAll();
             }
+            
             float volume = PlayerPrefs.GetFloat("Volume");
             int quality = PlayerPrefs.GetInt("Quality", QualitySettings.GetQualityLevel());
             bool fullscreen = PlayerPrefs.GetInt("Fullscreen", Screen.fullScreen ? 1 : 0 ) == 1;

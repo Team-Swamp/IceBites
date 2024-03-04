@@ -810,19 +810,7 @@ MonoBehaviour:
         m_MethodName: ActivateMenu
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2132501184087347242}
-        m_TargetAssemblyTypeName: UI.SwitchMenus, Assembly-CSharp
-        m_MethodName: ActivateMenu
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 897081969933519}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -847,7 +835,7 @@ MonoBehaviour:
   slider: {fileID: 7951974058767522669}
   progressSlider: {fileID: 0}
   customSettings: 0
-  _sceneSwitcher: {fileID: 0}
+  sceneSwitcher: {fileID: 0}
 --- !u!1 &304518143747273915
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,7 +853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &304518143747273914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1535,8 +1523,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 4218569349028754092}
+        m_TargetAssemblyTypeName: UI.Menus.SettingsMenu, Assembly-CSharp
         m_MethodName: ApplySettings
         m_Mode: 1
         m_Arguments:
@@ -2601,25 +2589,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SwitchMenus, Assembly-CSharp
-        m_MethodName: HideMenu
-        m_Mode: 2
+      - m_Target: {fileID: 2132501184087347242}
+        m_TargetAssemblyTypeName: UI.Menus.SwitchMenus, Assembly-CSharp
+        m_MethodName: TogglePauseGame
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 897081969933519}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SwitchMenus, Assembly-CSharp
-        m_MethodName: PauseGame
-        m_Mode: 1
+      - m_Target: {fileID: 2132501184087347242}
+        m_TargetAssemblyTypeName: UI.Menus.SwitchMenus, Assembly-CSharp
+        m_MethodName: HideMenu
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 897081969933519}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2747,8 +2735,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SwitchMenus, Assembly-CSharp
+      - m_Target: {fileID: 2132501184087347242}
+        m_TargetAssemblyTypeName: UI.Menus.SwitchMenus, Assembly-CSharp
         m_MethodName: HideMenu
         m_Mode: 2
         m_Arguments:
@@ -2759,8 +2747,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SwitchMenus, Assembly-CSharp
+      - m_Target: {fileID: 2132501184087347242}
+        m_TargetAssemblyTypeName: UI.Menus.SwitchMenus, Assembly-CSharp
         m_MethodName: ActivateMenu
         m_Mode: 2
         m_Arguments:
@@ -2894,8 +2882,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 4218569349028754092}
+        m_TargetAssemblyTypeName: UI.Menus.SettingsMenu, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 6
         m_Arguments:
@@ -3203,8 +3191,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SwitchMenus, Assembly-CSharp
+      - m_Target: {fileID: 2132501184087347242}
+        m_TargetAssemblyTypeName: UI.Menus.SwitchMenus, Assembly-CSharp
         m_MethodName: HideMenu
         m_Mode: 2
         m_Arguments:
@@ -3215,8 +3203,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SwitchMenus, Assembly-CSharp
+      - m_Target: {fileID: 2132501184087347242}
+        m_TargetAssemblyTypeName: UI.Menus.SwitchMenus, Assembly-CSharp
         m_MethodName: ActivateMenu
         m_Mode: 2
         m_Arguments:
@@ -3726,8 +3714,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 4218569349028754092}
+        m_TargetAssemblyTypeName: UI.Menus.SettingsMenu, Assembly-CSharp
         m_MethodName: SetQuality
         m_Mode: 0
         m_Arguments:
@@ -3831,8 +3819,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 4218569349028754092}
+        m_TargetAssemblyTypeName: UI.Menus.SettingsMenu, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
         m_Arguments:
@@ -5418,8 +5406,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SettingsMenu, Assembly-CSharp
+      - m_Target: {fileID: 4218569349028754092}
+        m_TargetAssemblyTypeName: UI.Menus.SettingsMenu, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
@@ -5553,10 +5541,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FrameWork.SceneSwitcher, Assembly-CSharp
-        m_MethodName: SetAndLoadAsyncScene
-        m_Mode: 5
+      - m_Target: {fileID: 2132501184087347242}
+        m_TargetAssemblyTypeName: UI.Menus.SwitchMenus, Assembly-CSharp
+        m_MethodName: TogglePauseGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5566,15 +5554,15 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.SwitchMenus, Assembly-CSharp
-        m_MethodName: PauseGame
-        m_Mode: 1
+        m_TargetAssemblyTypeName: FrameWork.SceneSwitcher, Assembly-CSharp
+        m_MethodName: SetAndLoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Main Menu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8418104763450592787
