@@ -38,9 +38,7 @@ namespace UI.Menus
             if (Application.platform == RuntimePlatform.Android || 
                 Application.platform == RuntimePlatform.IPhonePlayer)
             {
-                SetHighestQuality();
-                PlayerPrefs.DeleteAll();
-                resolutionsDropdown.gameObject.SetActive(false);
+                LoadMobileSettings();
             }
             
             PopulateResolutions();
@@ -61,6 +59,17 @@ namespace UI.Menus
             SetQuality(quality);
             SetFullscreen(fullscreen);
             SetResolution(resolution);
+        }
+        
+        /// <summary>
+        /// Loads the correct settings for mobile
+        /// </summary>
+        public void LoadMobileSettings()
+        {
+            SetHighestQuality();
+            PlayerPrefs.DeleteAll();
+            resolutionsDropdown.gameObject.SetActive(false);
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
         }
         #endregion
 
