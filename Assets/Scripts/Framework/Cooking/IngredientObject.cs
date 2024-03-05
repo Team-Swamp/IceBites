@@ -13,6 +13,7 @@ namespace Framework.Cooking
         private IngredientState _state;
 
         public Ingredient Ingredient => ingredient;
+        public IngredientState IngredientState => _state;
 
         [SerializeField] private UnityEvent onBeingPrepared = new();
         [SerializeField] private UnityEvent onCooked = new();

@@ -30,7 +30,9 @@ namespace Framework.Cooking
 
             ingredientObject = targetIngredient;
             ingredientObject.transform.position = ingredientPosition.position;
-            ChangeCurrentIngredientState(IngredientState.BEING_PREPARED);
+           
+            if(ingredientObject.IngredientState == IngredientState.RAW)
+                ChangeCurrentIngredientState(IngredientState.BEING_PREPARED);
             
             Grill();
         }
