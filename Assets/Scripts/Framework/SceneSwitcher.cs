@@ -1,26 +1,23 @@
 using System.Collections;
+using Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace FrameWork
 {
-    public sealed class SceneSwitcher : MonoBehaviour
+    public sealed class SceneSwitcher : Singleton<SceneSwitcher>
     {
         private const double ASYNC_CONVERTER = 0.9;
         
         [SerializeField] private bool loadSceneInAwake;
         [SerializeField] private string sceneToLoad;
 
-        private float _progress;
+        public float Progress { get; private set; }
 
-        public float Progress
+        private new void Awake()
         {
-            get => _progress;
-            private set => _progress = value;
-        }
-
-        private void Awake()
-        {
+            base.Awake();
+            
             if (loadSceneInAwake)
                 LoadScene();
         }
