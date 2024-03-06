@@ -3,7 +3,6 @@ using FrameWork;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Serialization;
 using Slider = UnityEngine.UI.Slider;
 
 namespace UI.Menus
