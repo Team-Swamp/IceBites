@@ -3,6 +3,7 @@ using FrameWork;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 using Slider = UnityEngine.UI.Slider;
 
 namespace UI.Menus
@@ -15,7 +16,7 @@ namespace UI.Menus
         [SerializeField] private TMP_Dropdown resolutionsDropdown;
         [SerializeField] private TMP_Dropdown ratiosDropdown;
         [SerializeField] private GameObject fullScreen;
-        [SerializeField] private Slider slider;
+        [SerializeField] private Slider volumeSlider;
         [SerializeField] private Slider progressSlider;
         
         [Header("Saving")]
@@ -139,7 +140,7 @@ namespace UI.Menus
         public void SetVolume(float volume)
         {
             audioMixer.SetFloat("volume", volume);
-            slider.value = volume;
+            volumeSlider.value = volume;
             PlayerPrefs.SetFloat("Volume", volume);
         }
 
