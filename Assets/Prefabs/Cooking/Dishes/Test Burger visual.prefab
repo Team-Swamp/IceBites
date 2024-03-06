@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5483696482881652298}
   - component: {fileID: 6796395139092994782}
   m_Layer: 0
-  m_Name: Burger
+  m_Name: Test Burger visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

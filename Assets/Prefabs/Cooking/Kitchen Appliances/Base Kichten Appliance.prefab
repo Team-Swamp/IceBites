@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8040286653525174850}
   - component: {fileID: 8040286653525174851}
   - component: {fileID: 8040286653525174848}
-  - component: {fileID: 8040286653525174849}
+  - component: {fileID: 4876805035204357196}
   - component: {fileID: 8040286653525174973}
   m_Layer: 0
   m_Name: Base Kichten Appliance
@@ -86,8 +86,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8040286653525174849
-SphereCollider:
+--- !u!65 &4876805035204357196
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,7 +97,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8040286653525174973
 MonoBehaviour:
@@ -126,8 +126,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  ingredientObject: {fileID: 0}
+  useTimer: 0
+  newDishGameObject: {fileID: 6216830101811313093, guid: 837e9b15c185c0b4a80957c6fd7548d7, type: 3}
   ingredientPosition: {fileID: 8040286654278927770}
+  ingredientObject: {fileID: 0}
 --- !u!1 &8040286654278927771
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8040286654278927770}
   m_Layer: 0
-  m_Name: Location
+  m_Name: Dish/Ingdient location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

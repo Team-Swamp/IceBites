@@ -6,13 +6,16 @@ namespace Framework.Cooking
 {
     public sealed class IngredientObject : MonoBehaviour
     {
+        [HideInInspector] public DishManager parent;
+        
         [SerializeField] private Ingredient ingredient;
 
         [SerializeField] private Material cookedMat;
-        
+
         private IngredientState _state;
 
         public Ingredient Ingredient => ingredient;
+        
         public IngredientState IngredientState => _state;
 
         [SerializeField] private UnityEvent onBeingPrepared = new();
@@ -60,13 +63,8 @@ namespace Framework.Cooking
             if (fish.ingredient != Ingredient.FISH_RAW)
                 return;
             
-            fish.ingredient = Ingredient.FISH_COOKED;
-            SetMaterialCooked(fish);
-        }
-
-        private void SetMaterialCooked(IngredientObject fish)
-        {
             GetComponent<MeshRenderer>().material = cookedMat;
+            fish.ingredient = Ingredient.FISH_COOKED;
         }
     }
 }

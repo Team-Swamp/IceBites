@@ -6,12 +6,18 @@ namespace Framework.Cooking
 {
     public sealed class KitchenAppliance : InteractableObject
     {
-        [SerializeField] private bool useTimer;
+        private const string NEW_DISH_NAME = "New dish";
         
-        [SerializeField] private IngredientObject ingredientObject;
+        [Header("References")]
+        [SerializeField] private bool useTimer;
+        [SerializeField] private GameObject newDishGameObject;
         [SerializeField] private Transform ingredientPosition;
+        
+        [Header("Run time")]
+        [SerializeField] private IngredientObject ingredientObject;
 
         private Timer _timer;
+        private GameObject _dishGameObject;
 
         private void Awake()
         {
@@ -25,15 +31,23 @@ namespace Framework.Cooking
         /// <param name="targetIngredient">The target ingredient to set as current.</param>
         public void SetIngredient(IngredientObject targetIngredient)
         {
+            if (targetIngredient.parent != null
+                && ingredientObject != null
+                && targetIngredient.parent.CanMakeDish(ingredientObject))
+            {
+                Destroy(_dishGameObject);
+                FillDish(targetIngredient);
+                ingredientObject = null;
+                return;
+            }
+
             if(ingredientObject != null)
                 return;
-
+            
             ingredientObject = targetIngredient;
             ingredientObject.transform.position = ingredientPosition.position;
-           
-            if(ingredientObject.IngredientState == IngredientState.RAW)
-                ChangeCurrentIngredientState(IngredientState.BEING_PREPARED);
-            
+
+            CreateDish();
             Grill();
         }
 
@@ -46,7 +60,8 @@ namespace Framework.Cooking
         /// Calls the ChangeState(IngredientState) with converting the int.
         /// </summary>
         /// <param name="targetState">The target state</param>
-        public void ChangeCurrentIngredientState(int targetState) => ChangeCurrentIngredientState((IngredientState) targetState);
+        public void ChangeCurrentIngredientState(int targetState)
+            => ChangeCurrentIngredientState((IngredientState) targetState);
         
         /// <summary>
         /// Change the state to the next.
@@ -54,7 +69,8 @@ namespace Framework.Cooking
         /// BEING_PREPARED => COOKED
         /// </summary>
         /// <param name="targetState">The target state</param>
-        public void ChangeCurrentIngredientState(IngredientState targetState) => ingredientObject.ChangeState(targetState);
+        public void ChangeCurrentIngredientState(IngredientState targetState)
+            => ingredientObject.ChangeState(targetState);
         
         /// <summary>
         /// Cook the fish
@@ -66,7 +82,28 @@ namespace Framework.Cooking
             if (!_timer) 
                 return;
             
+            if(ingredientObject.IngredientState == IngredientState.RAW)
+                ChangeCurrentIngredientState(IngredientState.BEING_PREPARED);
+            
             _timer.SetCanCount(true);
+        }
+
+        private void CreateDish()
+        {
+            _dishGameObject
+                = Instantiate(newDishGameObject, ingredientPosition.position, ingredientPosition.rotation);
+            _dishGameObject.transform.SetParent(transform);
+            _dishGameObject.name = NEW_DISH_NAME;
+            _dishGameObject.GetComponent<DishManager>().AddIngredient(ingredientObject);
+        }
+
+        private void FillDish(IngredientObject targetIngredient)
+        {
+            DishManager dish = targetIngredient.parent;
+            dish.AddIngredient(ingredientObject);
+            dish.AddIngredient(targetIngredient);
+            dish.SetDishPosition(ingredientPosition.position);
+            dish.transform.SetParent(transform);
         }
     }
 }
