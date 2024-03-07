@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4760252478618340588}
   m_Layer: 0
-  m_Name: SM_Blender
+  m_Name: Blender
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
