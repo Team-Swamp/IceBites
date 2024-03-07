@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7140703874418316219}
   m_Layer: 0
-  m_Name: SM_Burger_Bread
+  m_Name: Burger Bread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

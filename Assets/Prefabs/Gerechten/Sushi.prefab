@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2417600151924959557}
   m_Layer: 0
-  m_Name: SM_Sushi
+  m_Name: Sushi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
