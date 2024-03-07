@@ -20,16 +20,13 @@ namespace UI.Menus
         
         [Header("Saving")]
         [SerializeField] private bool customSettings;
-        
-        [Header("Scene Switcher")]
-        [SerializeField] private SceneSwitcher sceneSwitcher;
 
         private Resolution[] _resolution;
 
         private void Awake()
         {
             if (progressSlider != null) 
-                progressSlider.value = sceneSwitcher.Progress;
+                progressSlider.value = SceneSwitcher.Instance.Progress;
             
             LoadSettings();
         }
@@ -68,8 +65,7 @@ namespace UI.Menus
             
             if (isMobile)
                 SetRatio(ratio);
-            else
-                SetResolution(resolution);
+            // todo: fix this error: else SetResolution(resolution);
         }
 
         /// <summary>
