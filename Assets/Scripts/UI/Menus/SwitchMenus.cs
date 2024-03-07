@@ -1,3 +1,4 @@
+using FrameWork;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,13 +11,13 @@ namespace UI.Menus
         [SerializeField] private UnityEvent pausingGame = new();
         
         /// <summary>
-        /// This hides a certain gameobject.
+        /// This hides a certain game object.
         /// </summary>
-        /// <param name="hidden">This will be the gameobject that gets hidden</param>
+        /// <param name="hidden">This will be the game object that gets hidden</param>
         public void HideMenu(GameObject hidden) => hidden.SetActive(false);
         
         /// <summary>
-        /// This will reveal a certain gameobject.
+        /// This will reveal a certain game object.
         /// </summary>
         /// <param name="active">This is the object that gets revealed</param>
         public void ActivateMenu(GameObject active) => active.SetActive(true);
@@ -38,5 +39,22 @@ namespace UI.Menus
             if(!_isPaused) 
                 pausingGame?.Invoke();
         }
+
+        /// <summary>
+        /// Set the sceneToLoad property to a new scene, if this succeeds it will load it, otherwise it will give an error.
+        /// </summary>
+        /// <param name="targetScene">The target scene to load.</param>
+        public void SetAndLoadScene(string targetScene) => SceneSwitcher.Instance.SetAndLoadScene(targetScene);
+        
+        /// <summary>
+        /// Set the sceneToLoad property to a new scene, if this succeeds it will load it asynchronously. Otherwise it will give an error.
+        /// </summary>
+        /// <param name="targetScene">The target scene to load.</param>
+        public void SetAndLoadAsyncScene(string targetScene) => SceneSwitcher.Instance.SetAndLoadAsyncScene(targetScene);
+
+        /// <summary>
+        /// Quits the application, made for Unity events.
+        /// </summary>
+        public void Quit() => Application.Quit();
     }
 }
