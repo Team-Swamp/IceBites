@@ -9,9 +9,9 @@ namespace Framework.Cooking
     {
         [SerializeField] private GameObject displayDish;
         [SerializeField] private List<IngredientObject> ingredients = new();
-
+        
         [SerializeField] private UnityEvent onDishMade = new();
-
+        
         /// <summary>
         /// Add an ingredient to a dish. If it's the second one it will transform into a dish model.
         /// </summary>
@@ -23,11 +23,32 @@ namespace Framework.Cooking
                 return;
 
             ingredients.Add(target);
-
+            SetParent();
+            
             if (ingredients.Count == 2)
                 MakeDish();
         }
 
+        /// <summary>
+        /// Check if the this can be made.
+        /// </summary>
+        /// <param name="target">The second ingredient to check</param>
+        /// <returns>True if the ingredients can be made into a dish, other wise it can not</returns>
+        public bool CanMakeDish(IngredientObject target)
+        {
+            ingredients.Add(target);
+            (bool canMakeDish, GameObject dishToShow) = CanMakeDish();
+            ingredients.Remove(target);
+            
+            return canMakeDish;
+        }
+
+        /// <summary>
+        /// Set the position of this dish.
+        /// </summary>
+        /// <param name="targetPos">Target position for this dish</param>
+        public void SetDishPosition(Vector3 targetPos) =>  transform.position = targetPos;
+        
         private void MakeDish()
         {
             (bool canMakeDish, GameObject dishToShow) = CanMakeDish();
@@ -43,20 +64,16 @@ namespace Framework.Cooking
                 Debug.LogError($"Cannot show dish. {ingredients[0]} {ingredients[1]}");
                 return;
             }
-
-            Debug.Log("Dish made with ingredients:");
-            foreach (var ingredient in ingredients)
-            {
-                Debug.Log(ingredient.Ingredient);
+            
+            foreach (var ingredient in ingredients) 
                 Destroy(ingredient.gameObject);
-            }
 
-            displayDish = Instantiate(dishToShow, ingredients[0].transform.position, Quaternion.identity);
+            displayDish = Instantiate(dishToShow, ingredients[0].transform.position, Quaternion.identity, transform);
             
             ingredients.Clear();
             onDishMade?.Invoke();
         }
-
+        
         private (bool, GameObject) CanMakeDish()
         {
             IEnumerable<Recipe> recipes = RecipesHolder.Instance.Recipes;
@@ -70,12 +87,22 @@ namespace Framework.Cooking
 
                 if (!isValidCombination)
                     continue;
-                
+
+                gameObject.name = recipe.name;
                 GameObject modelToShow = recipe.dishModel;
                 return (true, modelToShow);
             }
             
             return (false, null);
+        }
+
+        private void SetParent()
+        {
+            if(ingredients.Count != 1)
+                return;
+            
+            ingredients[0].transform.SetParent(transform);
+            ingredients[0].parent = this;   
         }
     }
 }
