@@ -4,7 +4,7 @@ using UnityEditor;
 namespace Editor
 {
     [CustomEditor(typeof(Timer))]
-    public class TimerEditor : UnityEditor.Editor
+    public sealed class TimerEditor : UnityEditor.Editor
     {
         private SerializedProperty _isCountingUp;
         private SerializedProperty _startingTime;

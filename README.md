@@ -1,2 +1,16 @@
-# Project-VooDoo
-Proef examen Unity game
+# Ice Bites
+Welcome to the Ice Bites project! A game about a point and click penguin restaurant.
+
+| Link | Description | Notes |
+| ---------|----------|----------|
+| [The Team](https://github.com/Team-Swamp/IceBites/wiki/The-Team) | Here is a list of the team members with their roles and what they have made | |
+| [Asset Naming Conventions](https://github.com/Team-Swamp/IceBites/wiki/Asset-Naming-Conventions) | An in depth convention for naming files | |
+| [Code Convention](https://github.com/Team-Swamp/IceBites/wiki/Code-convention) | A code convention used for this project | |
+| [Definition of done](https://github.com/Team-Swamp/IceBites/wiki/Definition-of-done) | When is something done? Here is a list of criterias of the definition of done. | |
+| [Git workflow](https://github.com/Team-Swamp/IceBites/wiki/Git-workflow) | This is our git workflow, with branchnaming | |
+| [Github repo](https://github.com/Team-Swamp/IceBites) | The github repo of our project. |  |
+| [Trello board](https://trello.com/b/KQocHShR/IceBites) | The trello board of our project. |  |
+| [Style guide](https://miro.com/app/board/uXjVNuSanqo=/) | Style guide for the project. |  |
+| [Daily scrum](https://mediacollegeamsterdam.sharepoint.com/:x:/r/teams/SDGAexamen20232024-Team02/_layouts/15/Doc.aspx?sourcedoc=%7BA7C005CB-CD2F-4A1F-9420-CC62A3D0A425%7D&file=Werk_Bestand.xlsx&action=default&mobileredirect=true) | An excel sheet of our daily stand-ups & -downs. | Only accessible if allowed in Media College Teams. |
+| [Unity version](https://unity.com/releases/editor/whats-new/2021.3.18) | The Unity version we use | [More info here](https://github.com/Team-Swamp/IceBites/wiki/Software-in-use#unity) |
+| [Spotify playlist](https://open.spotify.com/playlist/7cMNBDvHyAgNNINpjQO9JO?si=151a42cdadcc40eb) | Playlist we listen to during this project. | This is for fun. |
