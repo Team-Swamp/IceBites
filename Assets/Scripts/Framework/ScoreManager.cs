@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using Framework;
 using TMPro;
 using UnityEngine;
 
 namespace FrameWork
 {
-    public class ScoreManager : Singleton<ScoreManager>
+    public sealed class ScoreManager : Singleton<ScoreManager>
     {
-        public int TotalScore { get; private set; }
+        private const string SCORE_TEXT = "Score: ";
         
         [SerializeField] private TextMeshProUGUI scoreText;
+        
+        public int TotalScore { get; private set; }
 
         /// <summary>
         /// Function to increase the score
@@ -19,7 +19,7 @@ namespace FrameWork
         public void IncreaseScore(int scoreIncrease)
         {
             TotalScore += scoreIncrease;
-            scoreText.text = "Score: " + TotalScore;
+            scoreText.text = SCORE_TEXT + TotalScore;
         }
     }
 }

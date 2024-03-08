@@ -2,7 +2,6 @@
 using FrameWork.Enums;
 using FrameWork.Extensions;
 using FrameWork.ScriptableObjects;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace NPC
@@ -52,7 +51,6 @@ namespace NPC
         {
             timer.SetCanCount(false);
             _hasOrder = true;
-            print($"Increase score by: " + SetScore());
             ScoreManager.Instance.IncreaseScore(SetScore());
             print($"Npc walks away.");
             //todo: NPC walk away
