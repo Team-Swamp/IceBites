@@ -34,6 +34,9 @@ namespace Framework.Cooking
         /// <param name="targetIngredient">The target ingredient to set as current.</param>
         public void SetIngredient(IngredientObject targetIngredient)
         {
+            if(targetIngredient == null)
+                return;
+            
             if (targetIngredient.parent != null
                 && ingredientObject != null
                 && targetIngredient.parent.CanMakeDish(ingredientObject))
@@ -81,6 +84,9 @@ namespace Framework.Cooking
         /// </summary>
         public void CookFish() => ingredientObject.CookFish(ingredientObject);
 
+        /// <summary>
+        /// Give the current held item that is in this kitchen appliance, if there is any.
+        /// </summary>
         public void GiveHeldItem()
         {
             if (player.CurrentItem)

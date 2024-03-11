@@ -9,6 +9,9 @@ namespace Framework.Cooking
         [SerializeField] private GameObject ingredient;
         [SerializeField] private ItemHolding player;
 
+        /// <summary>
+        /// Give the selected ingredient to the player, by creating it.
+        /// </summary>
         public void GiveIngredient()
         {
             if(player.CurrentItem)
