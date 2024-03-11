@@ -10,6 +10,7 @@ namespace Framework.Animation
         private const string NO_ANIMATOR_ERROR = "Animator component is not assigned.";
         
         private Animator _animator;
+        
         private void Awake() => _animator = GetComponent<Animator>();
         
         /// <summary>
