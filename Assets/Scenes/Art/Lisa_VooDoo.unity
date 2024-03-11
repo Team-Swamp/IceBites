@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18243541, g: 0.22515081, b: 0.28987572, a: 1}
+  m_IndirectSpecularColor: {r: 0.18179844, g: 0.22747117, b: 0.30742204, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1844,31 +1844,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 620242436230892218, guid: 6e8f71e89198f974f989021eb06be757, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.28592095
+      value: 0.38269663
       objectReference: {fileID: 0}
     - target: {fileID: 620242436230892218, guid: 6e8f71e89198f974f989021eb06be757, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3769223
+      value: 0.37139514
       objectReference: {fileID: 0}
     - target: {fileID: 620242436230892218, guid: 6e8f71e89198f974f989021eb06be757, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.8778002
+      value: 0.80700964
       objectReference: {fileID: 0}
     - target: {fileID: 620242436230892218, guid: 6e8f71e89198f974f989021eb06be757, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.07513734
+      value: -0.25366196
       objectReference: {fileID: 0}
     - target: {fileID: 620242436230892218, guid: 6e8f71e89198f974f989021eb06be757, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 20.331
+      value: 43.922
       objectReference: {fileID: 0}
     - target: {fileID: 620242436230892218, guid: 6e8f71e89198f974f989021eb06be757, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 151.647
+      value: 143.419
       objectReference: {fileID: 0}
     - target: {fileID: 620242436230892218, guid: 6e8f71e89198f974f989021eb06be757, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 41.29
+      value: 34.241
       objectReference: {fileID: 0}
     - target: {fileID: 620242436230892220, guid: 6e8f71e89198f974f989021eb06be757, type: 3}
       propertyPath: m_Name
