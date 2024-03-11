@@ -13,51 +13,114 @@ namespace UI.Menus
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private TMP_Dropdown graphicsDropdown;
         [SerializeField] private TMP_Dropdown resolutionsDropdown;
-        [SerializeField] private Slider slider;
+        [SerializeField] private TMP_Dropdown ratiosDropdown;
+        [SerializeField] private GameObject fullScreen;
+        [SerializeField] private Slider volumeSlider;
         [SerializeField] private Slider progressSlider;
+        
         [Header("Saving")]
         [SerializeField] private bool customSettings;
-        [Header("Scene Switcher")]
-        [SerializeField] private SceneSwitcher sceneSwitcher;
 
         private Resolution[] _resolution;
 
         private void Awake()
         {
             if (progressSlider != null) 
-                progressSlider.value = sceneSwitcher.Progress;
+                progressSlider.value = SceneSwitcher.Instance.Progress;
+            
             LoadSettings();
         }
 
         #region Loading
+        
         /// <summary>
         /// This loads all the custom settings, if there are no custom settings it will run default settings.
         /// </summary>
         public void LoadSettings()
         {
+            bool isMobile = Application.platform == RuntimePlatform.Android
+                            || Application.platform == RuntimePlatform.IPhonePlayer;
+            
+            if (isMobile)
+                LoadMobileSettings();
+            
             PopulateResolutions();
             customSettings = PlayerPrefs.GetInt("CustomSettings", customSettings ? 1 : 0) == 1;
+            
             if (!customSettings)
             {
                 SetHighestQuality();
                 PlayerPrefs.DeleteAll();
             }
+            
             float volume = PlayerPrefs.GetFloat("Volume");
-            int quality = PlayerPrefs.GetInt("Quality", QualitySettings.GetQualityLevel());
             bool fullscreen = PlayerPrefs.GetInt("Fullscreen", Screen.fullScreen ? 1 : 0 ) == 1;
+            int quality = PlayerPrefs.GetInt("Quality", QualitySettings.GetQualityLevel());
             int resolution = PlayerPrefs.GetInt("Resolution", GetDefaultResolution());
+            int ratio = PlayerPrefs.GetInt("Ratio");
             
             SetVolume(volume);
             SetQuality(quality);
             SetFullscreen(fullscreen);
-            SetResolution(resolution);
+            
+            if (isMobile)
+                SetRatio(ratio);
+            // todo: fix this error: else SetResolution(resolution);
         }
+
+        /// <summary>
+        /// Set the aspect ratio for the application, used by Unity events.
+        /// </summary>
+        public void SetRatio() => SetRatio(ratiosDropdown.value);
+        
+        private void SetRatio(int ratio)
+        {
+            const int HEIGHT = 1080;
+    
+            switch (ratio)
+            {
+                case 0:
+                    Screen.SetResolution(1920, HEIGHT, Screen.fullScreen);
+                    break;
+                case 1:
+                    Screen.SetResolution(2560, HEIGHT, Screen.fullScreen);
+                    break;
+                case 2:
+                    Screen.SetResolution(2400, HEIGHT, Screen.fullScreen);
+                    break;
+                case 3:
+                    Screen.SetResolution(1440, HEIGHT, Screen.fullScreen);
+                    break;
+                case 4:
+                    Screen.SetResolution(1552, HEIGHT, Screen.fullScreen);
+                    break;
+                case 5:
+                    Screen.SetResolution(2340, HEIGHT, Screen.fullScreen);
+                    break;
+                default:
+                    Screen.SetResolution(1920, HEIGHT, Screen.fullScreen);
+                    Debug.LogWarning("Unsupported aspect ratio.");
+                    ratio = 0;
+                    return;
+            }
+            
+            PlayerPrefs.SetInt("Ratio", ratio);
+        }
+        
+        private void LoadMobileSettings()
+        {
+            SetHighestQuality();
+            PlayerPrefs.DeleteAll();
+            resolutionsDropdown.gameObject.SetActive(false);
+            fullScreen.SetActive(false);
+        }
+        
         #endregion
 
         #region Settings
         
         /// <summary>
-        /// Apply's all settings and makes sure these don't get reset
+        /// Applies all settings and makes sure these don't get reset
         /// </summary>
         public void ApplySettings()
         {
@@ -72,7 +135,7 @@ namespace UI.Menus
         public void SetVolume(float volume)
         {
             audioMixer.SetFloat("volume", volume);
-            slider.value = volume;
+            volumeSlider.value = volume;
             PlayerPrefs.SetFloat("Volume", volume);
         }
 
@@ -147,7 +210,7 @@ namespace UI.Menus
             resolutionsDropdown.value = currentResolution;
             resolutionsDropdown.RefreshShownValue();
         }
-        #endregion
 
+        #endregion
     }
 }

@@ -17,8 +17,6 @@ namespace NPC
         private bool _hasOrder;
         private int _currentOrder;
         private int _correctDishes;
-        
-        public float Score { get; private set; }
 
         private void Awake() => FillOrder();
 
@@ -40,23 +38,25 @@ namespace NPC
                 SendNpcAway();
         }
 
-        public Dish[] GetOrder() => dishToOrder.Orders;
+        public Dish[] GetOrder()
+        {
+            timer.SetCanCount(true);
+            return dishToOrder.Orders;
+        }
 
         /// <summary>
         /// Set the score for the player with this NPC and send it away.
         /// </summary>
         public void SendNpcAway()
         {
-            SetScore();
+            timer.SetCanCount(false);
+            _hasOrder = true;
+            ScoreManager.Instance.IncreaseScore(SetScore());
             print($"Npc walks away.");
             //todo: NPC walk away
         }
 
-        private void SetScore()
-        {
-            _hasOrder = true;
-            Score = timer.GetCurrentTimerLenght() * _correctDishes;
-        }
+        private int SetScore() => (int) timer.GetCurrentTimerLenght() * _correctDishes;
         
         private void FillOrder()
         {
