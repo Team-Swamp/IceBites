@@ -3,14 +3,13 @@ using UnityEngine;
 
 namespace Framework.Animation
 {
+    [RequireComponent(typeof(Animator))]
     public sealed class AnimationController : MonoBehaviour
     {
         private const string INVALID_ANIMATION = "Animation name does not exist in the Animator controller: ";
         private const string NO_ANIMATOR_ERROR = "Animator component is not assigned.";
         
         private Animator _animator;
-
-
         private void Awake() => _animator = GetComponent<Animator>();
         
         /// <summary>

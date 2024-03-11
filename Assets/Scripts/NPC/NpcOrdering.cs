@@ -33,7 +33,7 @@ namespace NPC
             if(_hasOrder)
                 return;
 
-            if (target == dishToOrder.Orders[_currentOrder]){}
+            if (target == dishToOrder.Orders[_currentOrder])
                 _correctDishes++;
             
             _currentOrder++;
