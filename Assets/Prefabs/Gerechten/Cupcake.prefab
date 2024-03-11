@@ -420,7 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3763735860146271604}
   m_Layer: 0
-  m_Name: SM_Cupcake
+  m_Name: Cupcake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
