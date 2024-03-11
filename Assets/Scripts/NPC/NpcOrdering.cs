@@ -19,7 +19,7 @@ namespace NPC
         private int _currentOrder;
         private int _correctDishes;
 
-        [SerializeField] private UnityEvent onStartOrdering = new UnityEvent();
+        [SerializeField] private UnityEvent onDeliverOrder = new UnityEvent();
         [SerializeField] private UnityEvent onFinishOrdering = new UnityEvent();
 
         private void Awake() => FillOrder();
@@ -45,7 +45,7 @@ namespace NPC
 
         public Dish[] GetOrder()
         {
-            onStartOrdering?.Invoke();
+            onDeliverOrder?.Invoke();
             timer.SetCanCount(true);
             return dishToOrder.Orders;
         }
