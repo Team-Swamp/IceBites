@@ -1,5 +1,6 @@
 ﻿using FrameWork;
 using FrameWork.Enums;
+using Player;
 using UnityEngine;
 
 namespace Framework.Cooking
@@ -12,8 +13,10 @@ namespace Framework.Cooking
         [SerializeField] private bool useTimer;
         [SerializeField] private GameObject newDishGameObject;
         [SerializeField] private Transform ingredientPosition;
-        
+        [SerializeField] private ItemHolding player;
+
         [Header("Run time")]
+        [SerializeField] private DishManager dishManager;
         [SerializeField] private IngredientObject ingredientObject;
 
         private Timer _timer;
@@ -36,6 +39,7 @@ namespace Framework.Cooking
                 && targetIngredient.parent.CanMakeDish(ingredientObject))
             {
                 Destroy(_dishGameObject);
+                dishManager = null;
                 FillDish(targetIngredient);
                 ingredientObject = null;
                 return;
@@ -76,6 +80,32 @@ namespace Framework.Cooking
         /// Cook the fish
         /// </summary>
         public void CookFish() => ingredientObject.CookFish(ingredientObject);
+
+        public void GiveHeldItem()
+        {
+            if (player.CurrentItem)
+            {
+                Debug.Log("q3uihsdcio");
+                return;
+            }
+
+            HeldItem heldItemToGive = null;
+
+            if (dishManager
+                && ingredientObject == null)
+                heldItemToGive = dishManager;
+            else if (dishManager == null
+                     && ingredientObject)
+                heldItemToGive = ingredientObject;
+
+            if (heldItemToGive != null)
+            {
+                Debug.Log(heldItemToGive.name);
+                player.SetHeldItem(heldItemToGive);
+            }
+            else
+                Debug.LogWarning("");
+        }
         
         private void Grill()
         {
@@ -94,16 +124,17 @@ namespace Framework.Cooking
                 = Instantiate(newDishGameObject, ingredientPosition.position, ingredientPosition.rotation);
             _dishGameObject.transform.SetParent(transform);
             _dishGameObject.name = NEW_DISH_NAME;
-            _dishGameObject.GetComponent<DishManager>().AddIngredient(ingredientObject);
+            dishManager = _dishGameObject.GetComponent<DishManager>();
+            dishManager.AddIngredient(ingredientObject);
         }
 
         private void FillDish(IngredientObject targetIngredient)
         {
-            DishManager dish = targetIngredient.parent;
-            dish.AddIngredient(ingredientObject);
-            dish.AddIngredient(targetIngredient);
-            dish.SetDishPosition(ingredientPosition.position);
-            dish.transform.SetParent(transform);
+            dishManager = targetIngredient.parent;
+            dishManager.AddIngredient(ingredientObject);
+            dishManager.AddIngredient(targetIngredient);
+            dishManager.SetDishPosition(ingredientPosition.position);
+            dishManager.transform.SetParent(transform);
         }
     }
 }

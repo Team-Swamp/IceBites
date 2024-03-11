@@ -28,7 +28,6 @@ namespace Framework
                 transform.position = Vector3.MoveTowards(transform.position, newPos, p_movementSpeed * Time.deltaTime);
                 yield return null;
             }
-
             
             onStopMoving?.Invoke();
         } 

@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Framework.Cooking
 {
-    public sealed class IngredientObject : MonoBehaviour
+    public sealed class IngredientObject : HeldItem
     {
         [HideInInspector] public DishManager parent;
         

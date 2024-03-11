@@ -11,7 +11,7 @@ namespace Player.Input_Parser
         private const string CANVAS = "Canvas";
         private const string INTERACTABLE_TAG = "Interactable";
         
-        [SerializeField, Range(0, 20)] private float interactableRayDistance;
+        [SerializeField, Range(10, 100)] private float interactableRayDistance;
         
         private Camera _mainCamera;
         private PlayerInput _playerInput;
