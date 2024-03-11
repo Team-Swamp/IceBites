@@ -7,7 +7,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Finished Walk Cycle
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -243718416379887218}
   m_Solo: 0
@@ -17,7 +20,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9166667
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -228,7 +231,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8330200442999550356}
-    m_Position: {x: 530, y: 210, z: 0}
+    m_Position: {x: 530, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4904444179754877524}
     m_Position: {x: 240, y: 100, z: 0}
@@ -237,7 +240,7 @@ AnimatorStateMachine:
     m_Position: {x: 530, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1650765010178319372}
-    m_Position: {x: 240, y: 320, z: 0}
+    m_Position: {x: 240, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3184533518838549836}
     m_Position: {x: 490, y: 410, z: 0}
@@ -253,7 +256,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_EntryPosition: {x: -70, y: 200, z: 0}
   m_ExitPosition: {x: 860, y: 200, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -243718416379887218}
@@ -365,7 +368,19 @@ AnimatorController:
   m_PrefabAsset: {fileID: 0}
   m_Name: AC_Penguin
   serializedVersion: 5
-  m_AnimatorParameters: []
+  m_AnimatorParameters:
+  - m_Name: Walk Cycle
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Finished Walk Cycle
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Walk
@@ -488,7 +503,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Walk Cycle
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8330200442999550356}
   m_Solo: 0
@@ -498,7 +516,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.97413796
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
