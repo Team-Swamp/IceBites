@@ -302,7 +302,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2803025908464977032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9925202a4445bf4e9737ea010f60929, type: 3}
+  m_Script: {fileID: 11500000, guid: d9f44bf34fc4449488dcb872b50065c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &68008353
@@ -325,8 +325,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 68008352}
-        m_TargetAssemblyTypeName: NPC.NpcAnimationController, Assembly-CSharp
-        m_MethodName: PlayNpcAnimation
+        m_TargetAssemblyTypeName: Framework.Animation.AnimationController, Assembly-CSharp
+        m_MethodName: PlayAnimation
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -396,33 +396,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 0}
   dishToOrder: {fileID: 11400000, guid: 0cc09428eefc73a4f90e1763e38ed10a, type: 2}
-  startOrdering:
+  onStartOrdering:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 68008353}
-        m_TargetAssemblyTypeName: NPC.NpcMovement, Assembly-CSharp
-        m_MethodName: StartMoving
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 68008352}
-        m_TargetAssemblyTypeName: NPC.NpcAnimationController, Assembly-CSharp
-        m_MethodName: PlayNpcAnimation
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: StartWalking
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  onFinishOrdering:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3286895847895036816
 GameObject:
   m_ObjectHideFlags: 0

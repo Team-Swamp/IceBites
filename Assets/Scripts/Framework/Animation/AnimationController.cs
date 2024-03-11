@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Framework.Animation
 {
-    public abstract class AnimationController : MonoBehaviour
+    public sealed class AnimationController : MonoBehaviour
     {
         private Animator _animator;
 
