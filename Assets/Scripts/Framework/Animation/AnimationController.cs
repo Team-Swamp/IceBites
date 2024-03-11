@@ -5,32 +5,35 @@ namespace Framework.Animation
 {
     public abstract class AnimationController : MonoBehaviour
     {
-        protected Animator p_animator;
+        private Animator _animator;
 
-        protected virtual void Awake() => p_animator = GetComponent<Animator>();
+        private const string INVALID_ANIMATION = "Animation name does not exist in the Animator controller: ";
+        private const string NO_ANIMATOR_ERROR = "Animator component is not assigned.";
 
-        protected virtual void PlayAnimation(string animationName)
+        private void Awake() => _animator = GetComponent<Animator>();
+
+        public void PlayAnimation(string animationName)
         {
-            if (IsValidAnimation(animationName));
-                p_animator.SetTrigger(animationName);
+            if (IsValidAnimation(animationName))
+                _animator.SetTrigger(animationName);
         }
     
-        protected bool IsValidAnimation(string animationName)
+        private bool IsValidAnimation(string animationName)
         {
-            if (p_animator == null)
+            if (_animator == null)
             {
-                Debug.LogError("Animator component is not assigned.");
+                Debug.LogError(NO_ANIMATOR_ERROR);
                 return false;
             }
 
-            bool animationParameters = p_animator.parameters.Any(param => param.name == animationName);
-            if (animationParameters)
-                return true;
-            else
+            bool animationParameters = _animator.parameters.Any(animationParam  => animationParam .name == animationName);
+            if (!animationParameters)
             {
-                Debug.LogError("Animation name does not exist in the Animator controller: " + animationName);
+                Debug.LogError(INVALID_ANIMATION + animationName);
                 return false;
             }
+
+            return true;
         }
     }
 }
