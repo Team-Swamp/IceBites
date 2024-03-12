@@ -37,9 +37,8 @@ namespace Framework.Cooking
         }
         
         /// <summary>
-        /// Set the current ingredient if there is none
+        /// Set the current ingredient if there is none. If already having one it can make a dish.
         /// </summary>
-        /// <param name="targetIngredient">The target ingredient to set as current.</param>
         public void SetIngredient()
         {
             if (!player.CurrentItem)
@@ -48,18 +47,14 @@ namespace Framework.Cooking
             HeldItem targetHeldItem = player.CurrentItem;
             IngredientObject targetIngredient = targetHeldItem.GetComponentInChildren<IngredientObject>();
             
-            if(targetIngredient == null)
-                return;
+            if (targetIngredient == null)
+                targetIngredient = targetHeldItem as IngredientObject;
             
             player.CurrentItem = null;
             
-            if (targetIngredient != null
-                && targetIngredient.parent != null
-                && ingredientObject != null
-                && targetIngredient.parent.CanMakeDish(ingredientObject))
+            if (ingredientObject != null
+                && ingredientObject.parent.CanMakeDish(targetIngredient))
             {
-                Destroy(_dishGameObject);
-                dishManager = null;
                 FillDish(targetIngredient);
                 ingredientObject = null;
                 return;
@@ -67,8 +62,7 @@ namespace Framework.Cooking
 
             if (ingredientObject != null)
                 return;
-
-            Debug.Log("Neer zet");
+            
             ingredientObject = targetIngredient;
             ingredientObject.transform.position = ingredientPosition.position;
 
@@ -146,7 +140,7 @@ namespace Framework.Cooking
 
         private void FillDish(IngredientObject targetIngredient)
         {
-            dishManager = targetIngredient.parent;
+            dishManager = ingredientObject.parent;
             dishManager.AddIngredient(ingredientObject);
             dishManager.AddIngredient(targetIngredient);
             dishManager.SetDishPosition(ingredientPosition.position);
