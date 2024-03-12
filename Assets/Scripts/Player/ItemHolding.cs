@@ -26,7 +26,6 @@ namespace Player
             if(CurrentItem)
                 return;
 
-            // Debug.Log("gewugyuiwerigyuewiguweyuiuyiweukygfuyigweugfyiewuigyfugyiweugyi");
             currentItem = targetHeldItem;
             currentItem.transform.position = heldItemPosition.position;
             currentItem.transform.SetParent(heldItemPosition);
