@@ -1,5 +1,6 @@
 ﻿using FrameWork;
 using FrameWork.Enums;
+using Player;
 using UnityEngine;
 
 namespace Framework.Cooking
@@ -12,8 +13,10 @@ namespace Framework.Cooking
         [SerializeField] private bool useTimer;
         [SerializeField] private GameObject newDishGameObject;
         [SerializeField] private Transform ingredientPosition;
-        
+        [SerializeField] private ItemHolding player;
+
         [Header("Run time")]
+        [SerializeField] private DishManager dishManager;
         [SerializeField] private IngredientObject ingredientObject;
 
         private Timer _timer;
@@ -25,23 +28,39 @@ namespace Framework.Cooking
                 _timer = GetComponent<Timer>();
         }
 
-        /// <summary>
-        /// Set the current ingredient if there is none
-        /// </summary>
-        /// <param name="targetIngredient">The target ingredient to set as current.</param>
-        public void SetIngredient(IngredientObject targetIngredient)
+        public void SetOrPickUpItem()
         {
-            if (targetIngredient.parent != null
-                && ingredientObject != null
-                && targetIngredient.parent.CanMakeDish(ingredientObject))
+            if (!player.CurrentItem)
+                GiveHeldItem();
+            else
+                SetIngredient();
+        }
+        
+        /// <summary>
+        /// Set the current ingredient if there is none. If already having one it can make a dish.
+        /// </summary>
+        public void SetIngredient()
+        {
+            if (!player.CurrentItem)
+                return;
+            
+            HeldItem targetHeldItem = player.CurrentItem;
+            IngredientObject targetIngredient = targetHeldItem.GetComponentInChildren<IngredientObject>();
+            
+            if (targetIngredient == null)
+                targetIngredient = targetHeldItem as IngredientObject;
+            
+            player.CurrentItem = null;
+            
+            if (ingredientObject != null
+                && ingredientObject.parent.CanMakeDish(targetIngredient))
             {
-                Destroy(_dishGameObject);
                 FillDish(targetIngredient);
                 ingredientObject = null;
                 return;
             }
 
-            if(ingredientObject != null)
+            if (ingredientObject != null)
                 return;
             
             ingredientObject = targetIngredient;
@@ -76,6 +95,27 @@ namespace Framework.Cooking
         /// Cook the fish
         /// </summary>
         public void CookFish() => ingredientObject.CookFish(ingredientObject);
+
+        /// <summary>
+        /// Give the current held item that is in this kitchen appliance, if there is any.
+        /// </summary>
+        public void GiveHeldItem()
+        {
+            if (player.CurrentItem)
+                return;
+
+            HeldItem heldItemToGive = null;
+
+            if (dishManager)
+                heldItemToGive = dishManager;
+            
+            if (heldItemToGive == null)
+                return;
+            
+            player.SetHeldItem(heldItemToGive);
+            dishManager = null;
+            ingredientObject = null;
+        }
         
         private void Grill()
         {
@@ -94,16 +134,17 @@ namespace Framework.Cooking
                 = Instantiate(newDishGameObject, ingredientPosition.position, ingredientPosition.rotation);
             _dishGameObject.transform.SetParent(transform);
             _dishGameObject.name = NEW_DISH_NAME;
-            _dishGameObject.GetComponent<DishManager>().AddIngredient(ingredientObject);
+            dishManager = _dishGameObject.GetComponent<DishManager>();
+            dishManager.AddIngredient(ingredientObject);
         }
 
         private void FillDish(IngredientObject targetIngredient)
         {
-            DishManager dish = targetIngredient.parent;
-            dish.AddIngredient(ingredientObject);
-            dish.AddIngredient(targetIngredient);
-            dish.SetDishPosition(ingredientPosition.position);
-            dish.transform.SetParent(transform);
+            dishManager = ingredientObject.parent;
+            dishManager.AddIngredient(ingredientObject);
+            dishManager.AddIngredient(targetIngredient);
+            dishManager.SetDishPosition(ingredientPosition.position);
+            dishManager.transform.SetParent(transform);
         }
     }
 }

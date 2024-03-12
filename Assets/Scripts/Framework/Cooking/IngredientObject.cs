@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Framework.Cooking
 {
-    public sealed class IngredientObject : MonoBehaviour
+    public sealed class IngredientObject : HeldItem
     {
         [HideInInspector] public DishManager parent;
         
@@ -63,7 +63,7 @@ namespace Framework.Cooking
             if (fish.ingredient != Ingredient.FISH_RAW)
                 return;
             
-            GetComponent<MeshRenderer>().material = cookedMat;
+            GetComponentInChildren<MeshRenderer>().material = cookedMat;
             fish.ingredient = Ingredient.FISH_COOKED;
         }
     }

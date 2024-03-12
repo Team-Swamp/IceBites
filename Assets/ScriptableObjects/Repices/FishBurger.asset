@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstIngredient: 3
   secondIngredient: 2
-  dishModel: {fileID: 8928582433526497532, guid: df8b88f9778832643b3256bbafa4a658, type: 3}
+  dishModel: {fileID: 2221574887948388237, guid: b9d411369a9c7ae47b36df3164f3a740, type: 3}

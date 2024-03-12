@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Framework.Cooking
 {
-    public sealed class DishManager : MonoBehaviour
+    public sealed class DishManager : HeldItem
     {
         [SerializeField] private GameObject displayDish;
         [SerializeField] private List<IngredientObject> ingredients = new();

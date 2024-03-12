@@ -11,7 +11,7 @@ namespace Player.Input_Parser
         private const string CANVAS = "Canvas";
         private const string INTERACTABLE_TAG = "Interactable";
         
-        [SerializeField, Range(0, 20)] private float interactableRayDistance;
+        [SerializeField, Range(10, 100)] private float interactableRayDistance;
         
         private Camera _mainCamera;
         private PlayerInput _playerInput;
@@ -19,8 +19,7 @@ namespace Player.Input_Parser
         private PlayerMovement _playerMovement;
         private SwitchMenus _switchMenus;
         private InteractableObject _lastInteractable;
-
-
+        
         private void Awake()
         {
             GetReferences();
@@ -75,7 +74,7 @@ namespace Player.Input_Parser
                     || _lastInteractable.transform != hit.collider.transform)
                     _lastInteractable = hit.collider.GetComponent<InteractableObject>();
                 
-                _lastInteractable.onInteract.Invoke();
+                _lastInteractable.onInteract?.Invoke();
             }
         }
 
