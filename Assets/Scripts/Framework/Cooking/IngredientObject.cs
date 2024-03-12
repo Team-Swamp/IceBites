@@ -63,7 +63,7 @@ namespace Framework.Cooking
             if (fish.ingredient != Ingredient.FISH_RAW)
                 return;
             
-            GetComponent<MeshRenderer>().material = cookedMat;
+            GetComponentInChildren<MeshRenderer>().material = cookedMat;
             fish.ingredient = Ingredient.FISH_COOKED;
         }
     }
