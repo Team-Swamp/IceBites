@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1373098794369618069}
   - component: {fileID: 3813085838099342431}
   m_Layer: 0
-  m_Name: Vork_01
+  m_Name: Vork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
