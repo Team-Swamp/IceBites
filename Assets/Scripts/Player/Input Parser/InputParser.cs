@@ -19,8 +19,7 @@ namespace Player.Input_Parser
         private PlayerMovement _playerMovement;
         private SwitchMenus _switchMenus;
         private InteractableObject _lastInteractable;
-
-
+        
         private void Awake()
         {
             GetReferences();
@@ -75,7 +74,7 @@ namespace Player.Input_Parser
                     || _lastInteractable.transform != hit.collider.transform)
                     _lastInteractable = hit.collider.GetComponent<InteractableObject>();
                 
-                _lastInteractable.onInteract.Invoke();
+                _lastInteractable.onInteract?.Invoke();
             }
         }
 

@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8040286653525174854}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -97,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.761097, y: 1, z: 3.586998}
+  m_Center: {x: 0.4018917, y: 0, z: 0.3149757}
 --- !u!114 &8040286653525174973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,11 +116,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8040286653525174973}
         m_TargetAssemblyTypeName: Framework.Cooking.KitchenAppliance, Assembly-CSharp
-        m_MethodName: SetIngredient
-        m_Mode: 2
+        m_MethodName: SetOrPickUpItem
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: Framework.Cooking.IngredientObject, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -129,6 +129,8 @@ MonoBehaviour:
   useTimer: 0
   newDishGameObject: {fileID: 6216830101811313093, guid: 837e9b15c185c0b4a80957c6fd7548d7, type: 3}
   ingredientPosition: {fileID: 8040286654278927770}
+  player: {fileID: 0}
+  dishManager: {fileID: 0}
   ingredientObject: {fileID: 0}
 --- !u!1 &8040286654278927771
 GameObject:

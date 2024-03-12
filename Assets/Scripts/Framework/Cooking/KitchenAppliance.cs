@@ -28,16 +28,33 @@ namespace Framework.Cooking
                 _timer = GetComponent<Timer>();
         }
 
+        public void SetOrPickUpItem()
+        {
+            if (!player.CurrentItem)
+                GiveHeldItem();
+            else
+                SetIngredient();
+        }
+        
         /// <summary>
         /// Set the current ingredient if there is none
         /// </summary>
         /// <param name="targetIngredient">The target ingredient to set as current.</param>
-        public void SetIngredient(IngredientObject targetIngredient)
+        public void SetIngredient()
         {
+            if (!player.CurrentItem)
+                return;
+            
+            HeldItem targetHeldItem = player.CurrentItem;
+            IngredientObject targetIngredient = targetHeldItem.GetComponentInChildren<IngredientObject>();
+            
             if(targetIngredient == null)
                 return;
             
-            if (targetIngredient.parent != null
+            player.CurrentItem = null;
+            
+            if (targetIngredient != null
+                && targetIngredient.parent != null
                 && ingredientObject != null
                 && targetIngredient.parent.CanMakeDish(ingredientObject))
             {
@@ -48,9 +65,10 @@ namespace Framework.Cooking
                 return;
             }
 
-            if(ingredientObject != null)
+            if (ingredientObject != null)
                 return;
-            
+
+            Debug.Log("Neer zet");
             ingredientObject = targetIngredient;
             ingredientObject.transform.position = ingredientPosition.position;
 
@@ -90,27 +108,19 @@ namespace Framework.Cooking
         public void GiveHeldItem()
         {
             if (player.CurrentItem)
-            {
-                Debug.Log("q3uihsdcio");
                 return;
-            }
 
             HeldItem heldItemToGive = null;
 
-            if (dishManager
-                && ingredientObject == null)
+            if (dishManager)
                 heldItemToGive = dishManager;
-            else if (dishManager == null
-                     && ingredientObject)
-                heldItemToGive = ingredientObject;
-
-            if (heldItemToGive != null)
-            {
-                Debug.Log(heldItemToGive.name);
-                player.SetHeldItem(heldItemToGive);
-            }
-            else
-                Debug.LogWarning("");
+            
+            if (heldItemToGive == null)
+                return;
+            
+            player.SetHeldItem(heldItemToGive);
+            dishManager = null;
+            ingredientObject = null;
         }
         
         private void Grill()

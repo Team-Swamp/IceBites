@@ -11,7 +11,11 @@ namespace Player
         [Header("Runtime")]
         [SerializeField] private HeldItem currentItem;
 
-        public HeldItem CurrentItem => currentItem;
+        public HeldItem CurrentItem
+        {
+            get => currentItem;
+            set => currentItem = value;
+        }
 
         /// <summary>
         /// If holding none it will hold the given target. Is also updates the position and parent object.
@@ -22,7 +26,7 @@ namespace Player
             if(CurrentItem)
                 return;
 
-            Debug.Log("gewugyuiwerigyuewiguweyuiuyiweukygfuyigweugfyiewuigyfugyiweugyi");
+            // Debug.Log("gewugyuiwerigyuewiguweyuiuyiweukygfuyigweugfyiewuigyfugyiweugyi");
             currentItem = targetHeldItem;
             currentItem.transform.position = heldItemPosition.position;
             currentItem.transform.SetParent(heldItemPosition);
@@ -39,11 +43,6 @@ namespace Player
 
             GameObject heldItem = Instantiate(targetHeldItem);
             SetHeldItem(heldItem.GetComponent<HeldItem>());
-        }
-
-        public void GiveHeldItem()
-        {
-            
         }
     }
 }
