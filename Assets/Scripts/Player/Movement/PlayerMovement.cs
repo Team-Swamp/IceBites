@@ -22,7 +22,7 @@ namespace Player.Movement
         /// </summary>
         public void StartMoving()
         {
-            StartMoving(_hasWalked ? PlayerPoints.POINT_B : PlayerPoints.POINT_C);
+            StartMoving(_hasWalked ? PlayerPoints.COMBINE_AREA : PlayerPoints.GRILL);
             _hasWalked = !_hasWalked;
         }
         
