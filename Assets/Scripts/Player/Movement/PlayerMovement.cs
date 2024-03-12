@@ -8,23 +8,12 @@ namespace Player.Movement
     public sealed class PlayerMovement : BaseMovement
     {
         [SerializeField] private UnityEvent activateMovingProtocol = new();
-
-        private bool _hasWalked;
         
         /// <summary>
         /// Converts the Enums into an integer to be called in a Unity Event.
         /// </summary>
         /// <param name="playerPoints">Enum</param>
         public void StartMoving(int playerPoints) => StartMoving((PlayerPoints)playerPoints);
-
-        /// <summary>
-        /// A test function to toggle the walk point.
-        /// </summary>
-        public void StartMoving()
-        {
-            StartMoving(_hasWalked ? PlayerPoints.COMBINE_AREA : PlayerPoints.GRILL);
-            _hasWalked = !_hasWalked;
-        }
         
         /// <summary>
         /// Moves the player from it's starting position towards the newly designated position.

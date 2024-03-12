@@ -8,7 +8,7 @@ namespace Framework
 {
     public abstract class BaseMovement : MonoBehaviour
     {
-        [SerializeField,Range(1,10)] protected float p_movementSpeed = 1; 
+        [SerializeField,Range(1,10)] protected float p_movementSpeed; 
         
         [SerializeField] protected UnityEvent onStartedMoving = new();
         [SerializeField] protected UnityEvent onStopMoving = new();

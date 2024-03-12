@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6062870906453776085}
   - component: {fileID: 6062870906453776082}
   - component: {fileID: 6062870906453776083}
+  - component: {fileID: 16608119}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -139,19 +140,7 @@ MonoBehaviour:
       m_Calls: []
   activateMovingProtocol:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6062870906453776085}
-        m_TargetAssemblyTypeName: Player.Movement.PlayerMovement, Assembly-CSharp
-        m_MethodName: StartMoving
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6062870906453776082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b3ef4773039744c971dd20c6f53e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableRayDistance: 0
+  interactableRayDistance: 35
 --- !u!114 &6062870906453776083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,3 +200,17 @@ MonoBehaviour:
   m_DefaultActionMap: Move
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &16608119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6062870906453776080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550419cd88a44b5da35fee71d432d81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heldItemPosition: {fileID: 1819654958}
+  currentItem: {fileID: 0}
