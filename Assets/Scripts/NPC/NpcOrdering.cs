@@ -3,6 +3,7 @@ using FrameWork.Enums;
 using FrameWork.Extensions;
 using FrameWork.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace NPC
 {
@@ -17,6 +18,9 @@ namespace NPC
         private bool _hasOrder;
         private int _currentOrder;
         private int _correctDishes;
+
+        [SerializeField] private UnityEvent onDeliverOrder = new UnityEvent();
+        [SerializeField] private UnityEvent onFinishOrdering = new UnityEvent();
 
         private void Awake() => FillOrder();
 
@@ -33,6 +37,7 @@ namespace NPC
                 _correctDishes++;
             
             _currentOrder++;
+            onFinishOrdering?.Invoke();
 
             if (_currentOrder == dishToOrder.Orders.Length)
                 SendNpcAway();
@@ -40,6 +45,7 @@ namespace NPC
 
         public Dish[] GetOrder()
         {
+            onDeliverOrder?.Invoke();
             timer.SetCanCount(true);
             return dishToOrder.Orders;
         }

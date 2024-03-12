@@ -8,17 +8,20 @@ namespace NPC
 {
     public sealed class NpcMovement : BaseMovement
     {
-        private void Start() => StartCoroutine(MovingNpc());
+        /// <summary>
+        /// Converts the Enums into an integer to be called in a Unity Event.
+        /// </summary>
+        /// <param name="npcPoints">Enum</param>
+        public void StartMoving(int npcPoints) => StartMoving((NpcPoints)npcPoints);
         
-        private IEnumerator MovingNpc()
+        /// <summary>
+        /// Moves the NPC from it's starting position towards the newly designated position.
+        /// </summary>
+        /// <param name="targetPoint"></param>
+        public void StartMoving(NpcPoints targetPoint)
         {
-            while (true)
-            {
-                yield return StartCoroutine(MoveTowardsGridPoint(NpcPoints.NPC_COUNTER_POINT));
-                yield return new WaitForSeconds(1);
-                yield return StartCoroutine(MoveTowardsGridPoint(NpcPoints.NPC_STARTING_POINT));
-                
-            }
+            StartCoroutine(MoveTowardsGridPoint(targetPoint));
+            onStartedMoving?.Invoke();
         }
     }
 }
