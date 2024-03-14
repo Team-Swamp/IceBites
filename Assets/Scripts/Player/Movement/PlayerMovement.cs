@@ -1,5 +1,5 @@
 using Framework;
-using Framework.GridPoints;
+using Framework.Enums.GridPoints;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,6 +22,7 @@ namespace Player.Movement
         public void StartMoving(PlayerPoints targetPoint)
         {
             onStartedMoving?.Invoke();
+            StopAllCoroutines();
             StartCoroutine(MoveTowardsGridPoint(targetPoint));
         }
 

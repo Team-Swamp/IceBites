@@ -1,5 +1,7 @@
 ﻿using FrameWork;
 using FrameWork.Enums;
+using Framework.Enums.GridPoints;
+using FrameWork.Extensions;
 using Player;
 using UnityEngine;
 
@@ -14,11 +16,13 @@ namespace Framework.Cooking
         [SerializeField] private GameObject newDishGameObject;
         [SerializeField] private Transform ingredientPosition;
         [SerializeField] private ItemHolding player;
-
+        [SerializeField] private PlayerPoints thisPoint;
+        
         [Header("Run time")]
         [SerializeField] private DishManager dishManager;
         [SerializeField] private IngredientObject ingredientObject;
 
+        private bool _isAboutToBeInteracted;
         private Timer _timer;
         private GameObject _dishGameObject;
 
@@ -28,14 +32,21 @@ namespace Framework.Cooking
                 _timer = GetComponent<Timer>();
         }
 
-        public void SetOrPickUpItem()
-        {
-            if (!player.CurrentItem)
-                GiveHeldItem();
-            else
-                SetIngredient();
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SetOrPickUpItem() => _isAboutToBeInteracted = true;
         
+        private void Update()
+        {
+            if(!_isAboutToBeInteracted
+               || player.transform.position != thisPoint.GetVector3())
+                return;
+            
+            _isAboutToBeInteracted = false;
+            CallSetOrPickUpItem();
+        }
+
         /// <summary>
         /// Set the current ingredient if there is none. If already having one it can make a dish.
         /// </summary>
@@ -115,6 +126,14 @@ namespace Framework.Cooking
             player.SetHeldItem(heldItemToGive);
             dishManager = null;
             ingredientObject = null;
+        }
+        
+        private void CallSetOrPickUpItem()
+        {
+            if (!player.CurrentItem)
+                GiveHeldItem();
+            else
+                SetIngredient();
         }
         
         private void Grill()
