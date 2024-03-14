@@ -38,5 +38,16 @@ namespace Framework
             Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         }
+        
+        /// <summary>
+        /// This will invoke the onStartedMoving event with the enum that is given to it.
+        /// </summary>
+        /// <param name="targetPoint">The enum containing the list of grid points</param>
+        /// <typeparam name="T">This is an enum type.</typeparam>
+        public void StartMoving<T>(T targetPoint) where T: Enum
+        {
+            onStartedMoving?.Invoke();
+            StartCoroutine(MoveTowardsGridPoint(targetPoint));
+        }
     }
 }
