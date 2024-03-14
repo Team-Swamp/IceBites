@@ -1,5 +1,5 @@
 using Framework;
-using Framework.GridPoints;
+using Framework.Enums.GridPoints;
 using UnityEngine;
 using UnityEngine.Events;
 

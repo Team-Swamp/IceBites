@@ -1,6 +1,6 @@
 using FrameWork.Attributes;
 
-namespace Framework.GridPoints
+namespace Framework.Enums.GridPoints
 {
     public enum PlayerPoints
     {
