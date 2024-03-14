@@ -32,22 +32,22 @@ namespace Framework
             onStopMoving?.Invoke();
         } 
         
-        private void RotateToWalkPoint(Vector3 newPos)
-        {
-            Vector3 direction = new Vector3(newPos.x - transform.position.x, 0f, newPos.z - transform.position.z);
-            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
-        }
-        
         /// <summary>
         /// This will invoke the onStartedMoving event with the enum that is given to it.
         /// </summary>
         /// <param name="targetPoint">The enum containing the list of grid points</param>
         /// <typeparam name="T">This is an enum type.</typeparam>
-        public void StartMoving<T>(T targetPoint) where T: Enum
+        protected void StartMoving<T>(T targetPoint) where T: Enum
         {
             onStartedMoving?.Invoke();
             StartCoroutine(MoveTowardsGridPoint(targetPoint));
+        }
+        
+        private void RotateToWalkPoint(Vector3 newPos)
+        {
+            Vector3 direction = new Vector3(newPos.x - transform.position.x, 0f, newPos.z - transform.position.z);
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
         }
     }
 }
