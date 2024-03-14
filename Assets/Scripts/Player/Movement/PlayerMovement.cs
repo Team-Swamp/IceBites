@@ -14,17 +14,6 @@ namespace Player.Movement
         /// </summary>
         /// <param name="playerPoints">Enum</param>
         public void StartMoving(int playerPoints) => StartMoving((PlayerPoints)playerPoints);
-        
-        /// <summary>
-        /// Moves the player from it's starting position towards the newly designated position.
-        /// </summary>
-        /// <param name="targetPoint"></param>
-        public void StartMoving(PlayerPoints targetPoint)
-        {
-            onStartedMoving?.Invoke();
-            StopAllCoroutines();
-            StartCoroutine(MoveTowardsGridPoint(targetPoint));
-        }
 
         /// <summary>
         /// Starts a unity event to call the coroutine for moving the player. This allows for us to choose which point the player moves with unity events
