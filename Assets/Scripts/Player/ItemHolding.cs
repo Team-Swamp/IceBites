@@ -1,5 +1,6 @@
 ﻿using Framework.Cooking;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -11,10 +12,21 @@ namespace Player
         [Header("Runtime")]
         [SerializeField] private HeldItem currentItem;
 
+        [Header("Events")]
+        [SerializeField] private UnityEvent onHold = new();
+        [SerializeField] private UnityEvent onRelease = new();
+        
         public HeldItem CurrentItem
         {
             get => currentItem;
-            set => currentItem = value;
+            
+            set
+            {
+                currentItem = value;
+                
+                if(currentItem == null)
+                    onRelease?.Invoke();
+            }
         }
 
         /// <summary>
@@ -29,6 +41,7 @@ namespace Player
             currentItem = targetHeldItem;
             currentItem.transform.position = heldItemPosition.position;
             currentItem.transform.SetParent(heldItemPosition);
+            onHold?.Invoke();
         }
 
         /// <summary>

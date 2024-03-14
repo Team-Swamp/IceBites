@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8040286653525174850, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.43
+      value: -12.94
       objectReference: {fileID: 0}
     - target: {fileID: 8040286653525174850, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.61
       objectReference: {fileID: 0}
     - target: {fileID: 8040286653525174850, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 26.48
       objectReference: {fileID: 0}
     - target: {fileID: 8040286653525174850, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
       propertyPath: m_LocalRotation.w
@@ -55,8 +55,63 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grill
       objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: useTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2174570612569687726}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 8781869184212037385}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetOrPickUpItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FrameWork.Timer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Framework.Cooking.KitchenAppliance, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+--- !u!114 &8781869184212037385 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8040286653525174973, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
+  m_PrefabInstance: {fileID: 1606555134757094836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8781869184212037618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4350bcfadd44b409dfaf2505014f045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8781869184212037618 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8040286653525174854, guid: b7934e901ffb32241a2f6447dd646181, type: 3}
@@ -77,11 +132,35 @@ MonoBehaviour:
   isCountingUp: 0
   canCountOnAwake: 0
   canCount: 0
-  startingTime: 0
+  startingTime: 5
   timerThreshold: 0
   onTimerDone:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8781869184212037385}
+        m_TargetAssemblyTypeName: Framework.Cooking.KitchenAppliance, Assembly-CSharp
+        m_MethodName: CookFish
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8781869184212037385}
+        m_TargetAssemblyTypeName: Framework.Cooking.KitchenAppliance, Assembly-CSharp
+        m_MethodName: ChangeCurrentIngredientState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onTimerPassedThreshold:
     m_PersistentCalls:
       m_Calls: []
@@ -91,3 +170,16 @@ MonoBehaviour:
   onReset:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &8663106364285111791
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8781869184212037618}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.527423, y: 1, z: 5.5704536}
+  m_Center: {x: -0.13124609, y: 0, z: 0.2356224}
