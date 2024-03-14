@@ -33,7 +33,7 @@ namespace Framework.Cooking
         }
 
         /// <summary>
-        /// 
+        /// If the player is close by it will pick-up a dish or give an ingredient depending on if it's empty.
         /// </summary>
         public void SetOrPickUpItem() => _isAboutToBeInteracted = true;
         
